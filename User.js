@@ -4,4 +4,4 @@ class User  {
       this.lastName = lastName;
       this.mobileNumber = mobileNumber;
   }
-};
+}
