@@ -1,20 +1,40 @@
-
 import MenuItem from './MenuItem.js';
-class Menu { //ensure to create a seperate menu object for food and drinks determined by if MenuItem.isFood()
-  constructor(MenuItemArr = [])
-  {
-    this.MenuItemArr = MenuItemArr;
+
+class Menu {
+  constructor() {
+    this.foodMenuItems = [];
+    this.drinkMenuItems = [];
   }
-  addMenuItem(MenuItem)
-  {
-    this.MenuItemArr.push(MenuItem);
+
+  addFoodMenuItem(MenuItem) {
+    if (MenuItem.isFood()) {
+      this.foodMenuItems.push(MenuItem);
+    } else {
+      throw new Error('Item is not a food item.');
+    }
   }
-  removeMenuItem(MenuItem)
-  {
-    this.MenuItemArr.splice(this.MenuItemArr.indexOf(MenuItem), 1);
+
+  addDrinkMenuItem(MenuItem) {
+    if (!MenuItem.isFood()) {
+      this.drinkMenuItems.push(MenuItem);
+    } else {
+      throw new Error('Item is not a drink item.');
+    }
   }
-  getMenuItems()
-  {
-    return this.MenuItemArr;
+
+  removeMenuItem(MenuItem) {
+    if (MenuItem.isFood()) {
+      this.foodMenuItems.splice(this.foodMenuItems.indexOf(MenuItem), 1);
+    } else {
+      this.drinkMenuItems.splice(this.drinkMenuItems.indexOf(MenuItem), 1);
+    }
+  }
+
+  getFoodMenuItems() {
+    return this.foodMenuItems;
+  }
+
+  getDrinkMenuItems() {
+    return this.drinkMenuItems;
   }
 }
