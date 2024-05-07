@@ -1,5 +1,5 @@
 class Customer {
-  constructors() {
+  constructor() {
     
   }
 }

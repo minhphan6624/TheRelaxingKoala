@@ -1,4 +1,4 @@
 class FOHStaff {
-  constructors() {
+  constructor() {
   }
 }
