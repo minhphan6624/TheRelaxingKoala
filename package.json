@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "nodemon": "^3.1.0",
     "sequelize": "^6.37.3",
     "sqlite3": "^5.1.7"
   }
