@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController');
+
 const orderController = require('../controllers/orderController');
 
-// Define routes here
-router.post('/users', userController.createUser);
-router.post('/orders', orderController.createOrder);
+// Route to display the order form
+router.get('/orders/new', orderController.createOrderForm);
 
-// Add more routes as needed
+// Route to handle order form submission
+router.post('/orders', orderController.createOrder);
 
 module.exports = router;

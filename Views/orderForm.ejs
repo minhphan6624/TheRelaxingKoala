@@ -8,6 +8,26 @@
   <form action="/orders" method="POST">
     <label for="totalAmount">Total Amount:</label>
     <input type="number" id="totalAmount" name="totalAmount" required>
+    <label for="customerId">Customer ID:</label>
+    <input type="number" id="customerId" name="customerId" required>
+    <label for="tableId">Table ID:</label>
+    <input type="number" id="tableId" name="tableId" required>
+    <label for="fohStaffId">FOH Staff ID:</label>
+    <input type="number" id="fohStaffId" name="fohStaffId" required>
+    <div id="order-items">
+      <h3>Order Items:</h3>
+      <% menuItems.forEach((item, index) => { %>
+        <div class="order-item">
+          <label for="menuItem<%= index %>">Menu Item:</label>
+          <select id="menuItem<%= index %>" name="orderItems[<%= index %>][menuItemId]">
+            <option value="<%= item.id %>"><%= item.name %> - $<%= item.price %></option>
+          </select>
+          <label for="quantity<%= index %>">Quantity:</label>
+          <input type="number" id="quantity<%= index %>" name="orderItems[<%= index %>][quantity]" required>
+          <input type="hidden" name="orderItems[<%= index %>][price]" value="<%= item.price %>">
+        </div>
+      <% }) %>
+    </div>
     <button type="submit">Submit Order</button>
   </form>
 </body>
