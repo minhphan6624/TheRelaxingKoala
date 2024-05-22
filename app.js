@@ -1,25 +1,29 @@
 
 const express = require('express')
-const sequelize = require('./Config/database.js');
+const sequelize = require('./Config/database');
 const app = express();
 const port = 3000;
 
 //Set up view engine
 app.set('view engine', 'ejs');
 
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
-// Define a route
-app.get('/', (req, res) => {
-    res.render('index', { title: 'The Relaxing Koala', message: 'Welcome to the home page' });
-});
+// Routes
+app.use('/', require('./Routes/index'));
 
-// Start the server
+// Routes
+app.use('/orders', require('./Routes/orders'));
+
+//Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-// // Routes
-// app.use('/', require('./routes/index'));
 
 // // Sync database and start server
 // sequelize.sync()
