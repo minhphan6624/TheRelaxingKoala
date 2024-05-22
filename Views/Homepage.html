@@ -23,7 +23,7 @@
                         <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="#services">Order</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -46,33 +46,31 @@
     <section id="about" class="about-section text-center my-5">
         <div class="container">
             <h2>About Us</h2>
-            <p>About here section.</p>
+            <p>About Section.</p>
         </div>
     </section>
 
     <section id="services" class="services-section my-5 bg-light">
         <div class="container">
             <h2>Order Here</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="service-box p-3">
-                        <h3>Service 1</h3>
-                        <p>Description of this service.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-box p-3">
-                        <h3>Service 2</h3>
-                        <p>Description of this service.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-box p-3">
-                        <h3>Service 3</h3>
-                        <p>Description of this service.</p>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn btn-outline-primary" onclick="filterItems('all')">All</button>
+                <button class="btn btn-outline-primary" onclick="filterItems('food')">Food</button>
+                <button class="btn btn-outline-primary" onclick="filterItems('drink')">Drinks</button>
             </div>
+            <div class="row" id="menuItems">
+                <!-- Menu items will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section id="cart" class="cart-section py-5">
+        <div class="container">
+            <h2>Your Cart</h2>
+            <ul id="cartItems" class="list-group mb-3">
+                <!-- Cart items will be injected here by JavaScript -->
+            </ul>
+            <button class="btn btn-success" onclick="checkout()">Checkout</button>
         </div>
     </section>
 
@@ -101,6 +99,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.1.9/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/Public/js/script.js"></script>
 </body>
 </html>
