@@ -1,78 +1,166 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const menuItems = [
-        { id: 1, name: 'Spaghetti Carbonara', type: 'food', price: 12.99, image: '/img/spaghetti.jpg' },
-        { id: 2, name: 'Margherita Pizza', type: 'food', price: 10.99, image: 'path/to/pizza.jpg' },
-        { id: 3, name: 'Caesar Salad', type: 'food', price: 8.99, image: 'path/to/salad.jpg' },
-        { id: 4, name: 'Grilled Chicken', type: 'food', price: 14.99, image: 'path/to/chicken.jpg' },
-        { id: 5, name: 'Beef Steak', type: 'food', price: 18.99, image: 'path/to/steak.jpg' },
-        { id: 6, name: 'Salmon Sushi', type: 'food', price: 13.99, image: 'path/to/sushi.jpg' },
-        { id: 7, name: 'Pasta Primavera', type: 'food', price: 11.99, image: 'path/to/pasta.jpg' },
-        { id: 8, name: 'Chocolate Cake', type: 'food', price: 6.99, image: 'path/to/cake.jpg' },
-        { id: 9, name: 'Apple Pie', type: 'food', price: 5.99, image: 'path/to/pie.jpg' },
-        { id: 10, name: 'Margarita', type: 'drink', price: 7.99, image: 'path/to/margarita.jpg' },
-        { id: 11, name: 'Mojito', type: 'drink', price: 6.99, image: 'path/to/mojito.jpg' },
-        { id: 12, name: 'Pina Colada', type: 'drink', price: 8.99, image: 'path/to/pina-colada.jpg' },
-        { id: 13, name: 'Lemonade', type: 'drink', price: 3.99, image: 'path/to/lemonade.jpg' },
-        { id: 14, name: 'Iced Coffee', type: 'drink', price: 4.99, image: 'path/to/iced-coffee.jpg' },
-        { id: 15, name: 'Green Tea', type: 'drink', price: 2.99, image: 'path/to/green-tea.jpg' }
-    ];
+'use strict';
 
-    const menuContainer = document.getElementById('menuItems');
-    const cartContainer = document.getElementById('cartItems');
-    let cart = [];
 
-    function renderMenuItems(items) {
-        menuContainer.innerHTML = '';
-        items.forEach(item => {
-            const menuItem = document.createElement('div');
-            menuItem.classList.add('col-md-4', 'menu-item');
-            menuItem.innerHTML = `
-                <h5>${item.name}</h5>
-                <img src="${item.image}" alt="${item.name}">
-                <p>$${item.price.toFixed(2)}</p>
-                <button class="btn btn-primary" onclick="addToCart(${item.id})">Add to Cart</button>
-            `;
-            menuContainer.appendChild(menuItem);
-        });
+
+/**
+ * PRELOAD
+ * 
+ * loading will be end after document is loaded
+ */
+
+const preloader = document.querySelector("[data-preaload]");
+
+window.addEventListener("load", function () {
+    preloader.classList.add("loaded");
+    document.body.classList.add("loaded");
+});
+
+
+
+/**
+ * add event listener on multiple elements
+ */
+
+const addEventOnElements = function (elements, eventType, callback) {
+    for (let i = 0, len = elements.length; i < len; i++) {
+        elements[i].addEventListener(eventType, callback);
+    }
+}
+
+
+
+/**
+ * NAVBAR
+ */
+
+const navbar = document.querySelector("[data-navbar]");
+const navTogglers = document.querySelectorAll("[data-nav-toggler]");
+const overlay = document.querySelector("[data-overlay]");
+
+const toggleNavbar = function () {
+    navbar.classList.toggle("active");
+    overlay.classList.toggle("active");
+    document.body.classList.toggle("nav-active");
+}
+
+addEventOnElements(navTogglers, "click", toggleNavbar);
+
+
+
+/**
+ * HEADER & BACK TOP BTN
+ */
+
+const header = document.querySelector("[data-header]");
+const backTopBtn = document.querySelector("[data-back-top-btn]");
+
+let lastScrollPos = 0;
+
+const hideHeader = function () {
+    const isScrollBottom = lastScrollPos < window.scrollY;
+    if (isScrollBottom) {
+        header.classList.add("hide");
+    } else {
+        header.classList.remove("hide");
     }
 
-    window.filterItems = function (type) {
-        if (type === 'all') {
-            renderMenuItems(menuItems);
-        } else {
-            const filteredItems = menuItems.filter(item => item.type === type);
-            renderMenuItems(filteredItems);
-        }
-    };
+    lastScrollPos = window.scrollY;
+}
 
-    window.addToCart = function (itemId) {
-        const item = menuItems.find(item => item.id === itemId);
-        cart.push(item);
-        renderCartItems();
-    };
+window.addEventListener("scroll", function () {
+    if (window.scrollY >= 50) {
+        header.classList.add("active");
+        backTopBtn.classList.add("active");
+        hideHeader();
+    } else {
+        header.classList.remove("active");
+        backTopBtn.classList.remove("active");
+    }
+});
 
-    function renderCartItems() {
-        cartContainer.innerHTML = '';
-        cart.forEach(item => {
-            const cartItem = document.createElement('li');
-            cartItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-            cartItem.innerHTML = `
-                <span>${item.name} - $${item.price.toFixed(2)}</span>
-                <button class="btn btn-danger btn-sm" onclick="removeFromCart(${item.id})">Remove</button>
-            `;
-            cartContainer.appendChild(cartItem);
-        });
+
+
+/**
+ * HERO SLIDER
+ */
+
+const heroSlider = document.querySelector("[data-hero-slider]");
+const heroSliderItems = document.querySelectorAll("[data-hero-slider-item]");
+const heroSliderPrevBtn = document.querySelector("[data-prev-btn]");
+const heroSliderNextBtn = document.querySelector("[data-next-btn]");
+
+let currentSlidePos = 0;
+let lastActiveSliderItem = heroSliderItems[0];
+
+const updateSliderPos = function () {
+    lastActiveSliderItem.classList.remove("active");
+    heroSliderItems[currentSlidePos].classList.add("active");
+    lastActiveSliderItem = heroSliderItems[currentSlidePos];
+}
+
+const slideNext = function () {
+    if (currentSlidePos >= heroSliderItems.length - 1) {
+        currentSlidePos = 0;
+    } else {
+        currentSlidePos++;
     }
 
-    window.removeFromCart = function (itemId) {
-        cart = cart.filter(item => item.id !== itemId);
-        renderCartItems();
-    };
+    updateSliderPos();
+}
 
-    window.checkout = function () {
-        alert('Checkout feature coming soon!');
-    };
+heroSliderNextBtn.addEventListener("click", slideNext);
 
-    // Initial render
-    renderMenuItems(menuItems);
+const slidePrev = function () {
+    if (currentSlidePos <= 0) {
+        currentSlidePos = heroSliderItems.length - 1;
+    } else {
+        currentSlidePos--;
+    }
+
+    updateSliderPos();
+}
+
+heroSliderPrevBtn.addEventListener("click", slidePrev);
+
+/* This is the auto slide feature */
+
+let autoSlideInterval;
+
+const autoSlide = function () {
+    autoSlideInterval = setInterval(function () {
+        slideNext();
+    }, 7000);
+}
+
+addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], "mouseover", function () {
+    clearInterval(autoSlideInterval);
+});
+
+addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], "mouseout", autoSlide);
+
+window.addEventListener("load", autoSlide);
+
+
+
+/* This is PARALLAX EFFECT*/
+
+const parallaxItems = document.querySelectorAll("[data-parallax-item]");
+
+let x, y;
+
+window.addEventListener("mousemove", function (event) {
+
+    x = (event.clientX / window.innerWidth * 10) - 5;
+    y = (event.clientY / window.innerHeight * 10) - 5;
+
+
+    x = x - (x * 2);
+    y = y - (y * 2);
+
+    for (let i = 0, len = parallaxItems.length; i < len; i++) {
+        x = x * Number(parallaxItems[i].dataset.parallaxSpeed);
+        y = y * Number(parallaxItems[i].dataset.parallaxSpeed);
+        parallaxItems[i].style.transform = `translate3d(${x}px, ${y}px, 0px)`;
+    }
+
 });
