@@ -5,7 +5,6 @@ export default class Menu {
     }
     getMenuItemByIndex(index) {
       return this.menuItem[index];
-    
     }
       
 }
