@@ -1,4 +1,10 @@
 export default class Order {
+
+  
+
+
+
+
   constructor(orderData) {
     this.orderID = orderData.orderID;
     this.orderDateTime = orderData.orderDateTime || new Date();
