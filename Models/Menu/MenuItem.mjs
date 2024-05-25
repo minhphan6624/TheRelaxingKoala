@@ -1,4 +1,4 @@
-export class MenuItem {
+export default class MenuItem {
   constructor(name, price, isFood, imagePath, description) {
     this.name = name;
     this.price = price;
@@ -18,7 +18,18 @@ export class MenuItem {
     get description() {
       return this.description;
     }
-
+    set name(newName) {
+      this._name = newName;
+    }
+    set price(newPrice) {
+      this._price = newPrice;
+    }
+    set isFood(newIsFood) {
+      this._isFood = newIsFood;
+    }
+    set description(newDescription) {
+      this._description = newDescription;
+    }
     updateItemName(itemName) {
       this.name = itemName;
     }
