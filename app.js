@@ -18,7 +18,9 @@ app.use('/', require('./Routes/index'));
 
 // Routes
 app.use('/orders', require('./Routes/orders'));
-
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Views', 'index.html'));
+});
 //Start the server
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

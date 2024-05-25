@@ -3,19 +3,19 @@ const path = require('path');  // Required for resolving paths
 const router = express.Router();
 
 // Controllers
-const userController = require('../controllers/userController');
-const orderController = require('../controllers/orderController');
+//const userController = require('../Controllers/userController');
+//const orderController = require('../Controllers/orderController');
 
 // Serve the homepage
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'Views', 'homepage.html'));
+    res.sendFile(path.join(__dirname, '..', 'Views', 'index.html'));
 });
 
 // User routes
-router.post('/users', userController.createUser);
+//router.post('/users', userController.createUser);
 
 // Order routes
-router.post('/orders', orderController.createOrder);
+//router.post('/orders', orderController.createOrder);
 
 // Add more routes as needed
 
