@@ -1,4 +1,4 @@
-class MenuItem {
+export class MenuItem {
   constructor(name, price, isFood, imagePath, description) {
     this.name = name;
     this.price = price;
