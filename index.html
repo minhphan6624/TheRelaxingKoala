@@ -6,26 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <title>Relaxing Koala | Delicious Food</title>
   <meta name="title" content="Relaxing Koala | Delicious Food">
   <meta name="description" content="This is a Restaurant html template made by codewithsadee">
-
-  <!-- Favicon-->
+<!-- Favicon-->
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
 
-  <!--  Google fonts-->
+ <!--  Google fonts-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
 
-  <!--  Attaching Google Fonts-->
-  <link rel="stylesheet" href="style.css">
+<!--  Attaching Google Fonts-->
+  <link rel="stylesheet" href="/Public/css/style.css">
+
+
+  <link rel="preload" as="image" href="/Public/images/hero-slider-1.jpg">
+  <link rel="preload" as="image" href="/Public/images/hero-slider-2.jpg">
+  <link rel="preload" as="image" href="/Public/images/hero-slider-3.jpg">
 
 </head>
 
 <body id="top">
 
-  <!-- The top bar-->
+<!-- Proloader-->
+
+  <div class="preload" data-preaload>
+    <div class="circle"></div>
+    <p class="text">Relaxing Koala</p>
+  </div>
+
+<!-- The top bar-->
 
   <div class="topbar">
     <div class="container">
@@ -71,13 +83,17 @@
     </div>
   </div>
 
-  <!-- Header-->
+
+
+
+
+<!-- Header-->
 
   <header class="header" data-header>
     <div class="container">
 
       <a href="#" class="logo">
-        <img src=" images/OGLogo.png" width="160" height="50" alt="Relaxing Koala - Home">
+        <img src="/Public/images/OGLogo.png" width="160" height="50" alt="Relaxing Koala - Home">
       </a>
 
       <nav class="navbar" data-navbar>
@@ -86,14 +102,14 @@
           <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
         </button>
 
-        <a href="/" class="logo">
-          <img src=" images/OGLogo.png" width="160" height="50" alt="Relaxing Koala - Home">
+        <a href="#" class="logo">
+          <img src="/Public/images/OGLogo.png" width="160" height="50" alt="Relaxing Koala - Home">
         </a>
 
         <ul class="navbar-list">
 
           <li class="navbar-item">
-            <a href="/" class="navbar-link hover-underline active">
+            <a href="#home" class="navbar-link hover-underline active">
               <div class="separator"></div>
 
               <span class="span">Home</span>
@@ -101,7 +117,7 @@
           </li>
 
           <li class="navbar-item">
-            <a href="/menu" class="navbar-link hover-underline">
+            <a href="#menu" class="navbar-link hover-underline">
               <div class="separator"></div>
 
               <span class="span">Menus</span>
@@ -117,10 +133,10 @@
           </li>
 
           <li class="navbar-item">
-            <a href="/reservation" class="navbar-link hover-underline">
+            <a href="#" class="navbar-link hover-underline">
               <div class="separator"></div>
 
-              <span class="span">Make a reservation</span>
+              <span class="span">Our Chefs</span>
             </a>
           </li>
 
@@ -156,6 +172,12 @@
 
       </nav>
 
+      <a href="#" class="btn btn-secondary">
+        <span class="text text-1">Find A Table</span>
+
+        <span class="text text-2" aria-hidden="true">Find A Table</span>
+      </a>
+
       <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
         <span class="line line-1"></span>
         <span class="line line-2"></span>
@@ -166,6 +188,10 @@
 
     </div>
   </header>
+
+
+
+
 
   <main>
     <article>
@@ -181,7 +207,7 @@
           <li class="slider-item active" data-hero-slider-item>
 
             <div class="slider-bg">
-              <img src=" images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
+              <img src="/Public/images/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">Tradational & Hygine</p>
@@ -203,15 +229,76 @@
 
           </li>
 
+          <li class="slider-item" data-hero-slider-item>
+
+            <div class="slider-bg">
+              <img src="/Public/images/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
+            </div>
+
+            <p class="label-2 section-subtitle slider-reveal">delightful experience</p>
+
+            <h1 class="display-1 hero-title slider-reveal">
+              Flavors Inspired by <br>
+              the Seasons
+            </h1>
+
+            <p class="body-2 hero-text slider-reveal">
+              Come with family & feel the joy of mouthwatering food
+            </p>
+
+             <a href="#full-menu" class="btn btn-primary">
+  <span class="text text-1">View All Menu</span>
+  <span class="text text-2" aria-hidden="true">View All Menu</span>
+            </a>
+
+          </li>
+
+          <li class="slider-item" data-hero-slider-item>
+
+            <div class="slider-bg">
+              <img src="/Public/images/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
+            </div>
+
+            <p class="label-2 section-subtitle slider-reveal">amazing & delicious</p>
+
+            <h1 class="display-1 hero-title slider-reveal">
+              Where every flavor <br>
+              tells a story
+            </h1>
+
+            <p class="body-2 hero-text slider-reveal">
+              Come with family & feel the joy of mouthwatering food
+            </p>
+
+             <a href="#full-menu" class="btn btn-primary">
+  <span class="text text-1">View All Menu</span>
+  <span class="text text-2" aria-hidden="true">View All Menu</span>
+            </a>
+
+          </li>
+
         </ul>
 
+        <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+
+        <button class="slider-btn next" aria-label="slide to next" data-next-btn>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+
         <a href="#" class="hero-btn has-after">
-          <img src=" images/hero-icon.png" width="48" height="48" alt="booking icon">
+          <img src="/Public/images/hero-icon.png" width="48" height="48" alt="booking icon">
 
           <span class="label-2 text-center span">Book A Table</span>
         </a>
 
       </section>
+
+
+
+
+
       <!-- 
         - #SERVICE
       -->
@@ -224,7 +311,7 @@
           <h2 class="headline-1 section-title">We Offer Top Notch</h2>
 
           <p class="section-text">
-
+            
           </p>
 
           <ul class="grid-list">
@@ -234,7 +321,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src=" images/service-1.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
+                    <img src="/Public/images/service-1.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
                       class="img-cover">
                   </figure>
                 </a>
@@ -257,7 +344,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src=" images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
+                    <img src="/Public/images/service-2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
                       class="img-cover">
                   </figure>
                 </a>
@@ -280,7 +367,7 @@
 
                 <a href="#" class="has-before hover:shine">
                   <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
-                    <img src=" images/service-3.jpg" width="285" height="336" loading="lazy" alt="Drinks"
+                    <img src="/Public/images/service-3.jpg" width="285" height="336" loading="lazy" alt="Drinks"
                       class="img-cover">
                   </figure>
                 </a>
@@ -300,17 +387,22 @@
 
           </ul>
 
-          <img src=" images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
+          <img src="/Public/images/shape-1.png" width="246" height="412" loading="lazy" alt="shape"
             class="shape shape-1 move-anim">
-          <img src=" images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
+          <img src="/Public/images/shape-2.png" width="343" height="345" loading="lazy" alt="shape"
             class="shape shape-2 move-anim">
 
         </div>
       </section>
 
+
+
+
+
       <!-- 
         - #ABOUT
       -->
+
       <section class="section about text-center" aria-labelledby="about-label" id="about">
         <div class="container">
 
@@ -330,30 +422,90 @@
 
             <a href="tel:+804001234567" class="body-1 contact-number hover-underline">0499900088 </a>
 
+            <a href="#" class="btn btn-primary">
+              <span class="text text-1">Read More</span>
+
+              <span class="text text-2" aria-hidden="true">Read More</span>
+            </a>
+
           </div>
 
           <figure class="about-banner">
 
-            <img src=" images/about-banner.jpg" width="570" height="570" loading="lazy" alt="about banner" class="w-100"
-              data-parallax-item data-parallax-speed="1">
+            <img src="/Public/images/about-banner.jpg" width="570" height="570" loading="lazy" alt="about banner"
+              class="w-100" data-parallax-item data-parallax-speed="1">
 
             <div class="abs-img abs-img-1 has-before" data-parallax-item data-parallax-speed="1.75">
-              <img src=" images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt="" class="w-100">
+              <img src="/Public/images/about-abs-image.jpg" width="285" height="285" loading="lazy" alt=""
+                class="w-100">
             </div>
 
             <div class="abs-img abs-img-2 has-before">
-              <img src=" images/badge-2-bg.png" width="133" height="134" loading="lazy" alt="">
+              <img src="/Public/images/badge-2-bg.png" width="133" height="134" loading="lazy" alt="">
             </div>
 
           </figure>
 
-          <img src=" images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
+          <img src="/Public/images/shape-3.png" width="197" height="194" loading="lazy" alt="" class="shape">
 
         </div>
       </section>
 
 
-       <!-- 
+
+
+
+      <!-- 
+        - #SPECIAL DISH
+      -->
+
+      <section class="special-dish text-center" aria-labelledby="dish-label">
+
+        <div class="special-dish-banner">
+          <img src="/Public/images/special-dish-banner.jpg" width="940" height="900" loading="lazy" alt="special dish"
+            class="img-cover">
+        </div>
+
+        <div class="special-dish-content bg-black-10">
+          <div class="container">
+
+            <img src="/Public/images/badge-1.png" width="28" height="41" loading="lazy" alt="badge" class="abs-img">
+
+            <p class="section-subtitle label-2">Special Dish</p>
+
+            <h2 class="headline-1 section-title">Lobster Tortellini</h2>
+
+            <p class="section-text">
+              
+            </p>
+
+            <div class="wrapper">
+              <del class="del body-3">$40.00</del>
+
+              <span class="span body-1">$20.00</span>
+            </div>
+
+        <a href="#full-menu" class="btn btn-primary">
+  <span class="text text-1">View All Menu</span>
+  <span class="text text-2" aria-hidden="true">View All Menu</span>
+</a>
+
+
+
+          </div>
+        </div>
+
+        <img src="/Public/images/shape-4.png" width="179" height="359" loading="lazy" alt="" class="shape shape-1">
+
+        <img src="/Public/images/shape-9.png" width="351" height="462" loading="lazy" alt="" class="shape shape-2">
+
+      </section>
+
+
+
+
+
+      <!-- 
         - #MENU
       -->
 
@@ -370,7 +522,7 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-1.png" width="100" height="100" loading="lazy" alt="Greek Salad"
+                  <img src="/Public/images/menu-1.png" width="100" height="100" loading="lazy" alt="Greek Salad"
                     class="img-cover">
                 </figure>
 
@@ -399,7 +551,8 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-2.png" width="100" height="100" loading="lazy" alt="Lasagne" class="img-cover">
+                  <img src="/Public/images/menu-2.png" width="100" height="100" loading="lazy" alt="Lasagne"
+                    class="img-cover">
                 </figure>
 
                 <div>
@@ -425,7 +578,7 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-3.png" width="100" height="100" loading="lazy" alt="Butternut Pumpkin"
+                  <img src="/Public/images/menu-3.png" width="100" height="100" loading="lazy" alt="Butternut Pumpkin"
                     class="img-cover">
                 </figure>
 
@@ -452,7 +605,7 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-4.png" width="100" height="100" loading="lazy" alt="Tokusen Wagyu"
+                  <img src="/Public/images/menu-4.png" width="100" height="100" loading="lazy" alt="Tokusen Wagyu"
                     class="img-cover">
                 </figure>
 
@@ -481,7 +634,7 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-5.png" width="100" height="100" loading="lazy" alt="Olivas Rellenas"
+                  <img src="/Public/images/menu-5.png" width="100" height="100" loading="lazy" alt="Olivas Rellenas"
                     class="img-cover">
                 </figure>
 
@@ -508,7 +661,7 @@
               <div class="menu-card hover:card">
 
                 <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                  <img src=" images/menu-6.png" width="100" height="100" loading="lazy" alt="Opu Fish"
+                  <img src="/Public/images/menu-6.png" width="100" height="100" loading="lazy" alt="Opu Fish"
                     class="img-cover">
                 </figure>
 
@@ -537,14 +690,14 @@
             During winter daily from <span class="span">7:00 pm</span> to <span class="span">9:00 pm</span>
           </p>
 
-          <a href="#full-menu" class="btn btn-primary">
-            <span class="text text-1">View All Menu</span>
-            <span class="text text-2" aria-hidden="true">View All Menu</span>
+           <a href="#full-menu" class="btn btn-primary">
+  <span class="text text-1">View All Menu</span>
+  <span class="text text-2" aria-hidden="true">View All Menu</span>
           </a>
 
-          <img src=" images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
+          <img src="/Public/images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
             class="shape shape-2 move-anim">
-          <img src=" images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
+          <img src="/Public/images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
             class="shape shape-3 move-anim">
 
         </div>
@@ -559,7 +712,7 @@
       -->
 
       <section class="section testi text-center has-bg-image"
-        style="background-image: url(' images/testimonial-bg.jpg')" aria-label="testimonials">
+        style="background-image: url('/Public/images/testimonial-bg.jpg')" aria-label="testimonials">
         <div class="container">
 
           <div class="quote">”</div>
@@ -576,7 +729,8 @@
           </div>
 
           <div class="profile">
-            <img src=" images/testi-avatar.jpg" width="100" height="100" loading="lazy" alt="Steve Smith" class="img">
+            <img src="/Public/images/testi-avatar.jpg" width="100" height="100" loading="lazy" alt="Steve Smith"
+              class="img">
 
             <p class="label-2 profile-name">Steve Smith</p>
           </div>
@@ -672,7 +826,7 @@
 
             </form>
 
-            <div class="form-right text-center" style="background-image: url(' images/form-pattern.png')">
+            <div class="form-right text-center" style="background-image: url('/Public/images/form-pattern.png')">
 
               <h2 class="headline-1 text-center">Contact Us</h2>
 
@@ -730,7 +884,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src=" images/features-icon-1.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="/Public/images/features-icon-1.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Hygienic Food</h3>
@@ -744,7 +898,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src=" images/features-icon-2.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="/Public/images/features-icon-2.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Fresh Environment</h3>
@@ -758,7 +912,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src=" images/features-icon-3.png" width="100" height="80" loading="lazy" alt="icon">
+                  <img src="/Public/images/features-icon-3.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Skilled Chefs</h3>
@@ -772,8 +926,7 @@
               <div class="feature-card">
 
                 <div class="card-icon">
-                  <img src=" images/features-icon-4.png images/features-icon-4.png" width="100" height="80"
-                    loading="lazy" alt="icon">
+                  <img src="/Public/images/features-icon-4.png/Public/images/features-icon-4.png" width="100" height="80" loading="lazy" alt="icon">
                 </div>
 
                 <h3 class="title-2 card-title">Event & Party</h3>
@@ -785,9 +938,11 @@
 
           </ul>
 
-          <img src=" images/shape-7.png" width="208" height="178" loading="lazy" alt="shape" class="shape shape-1">
+          <img src="/Public/images/shape-7.png" width="208" height="178" loading="lazy" alt="shape"
+            class="shape shape-1">
 
-          <img src=" images/shape-8.png" width="120" height="115" loading="lazy" alt="shape" class="shape shape-2">
+          <img src="/Public/images/shape-8.png" width="120" height="115" loading="lazy" alt="shape"
+            class="shape shape-2">
 
         </div>
       </section>
@@ -813,7 +968,7 @@
               <div class="event-card has-before hover:shine">
 
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
-                  <img src=" images/event-1.jpg" width="350" height="450" loading="lazy"
+                  <img src="/Public/images/event-1.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
 
                   <time class="publish-date label-2" datetime="2022-09-15">24/05/2024</time>
@@ -834,7 +989,7 @@
               <div class="event-card has-before hover:shine">
 
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
-                  <img src=" images/event-2.jpg" width="350" height="450" loading="lazy"
+                  <img src="/Public/images/event-2.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
 
                   <time class="publish-date label-2" datetime="2022-09-08">24/05/2024</time>
@@ -855,7 +1010,7 @@
               <div class="event-card has-before hover:shine">
 
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
-                  <img src=" images/event-3.jpg" width="350" height="450" loading="lazy"
+                  <img src="/Public/images/event-3.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you’ll try to eat with your eyes." class="img-cover">
 
                   <time class="publish-date label-2" datetime="2022-09-03">24/05/2024</time>
@@ -889,36 +1044,35 @@
     <!-- 
   - #FULL MENU
 -->
-    <!-- Full Menu Section -->
-    <section class="section" id="full-menu">
-      <div class="container">
-        <h2 class="headline-1 text-center">Our Full Menu</h2>
-        <ul class="grid-list">
-          <!-- Sample full menu items -->
-          <li>
-            <div class="menu-card hover:card">
-              <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-                <img src=" images/menu-1.png" width="100" height="100" loading="lazy" alt="Greek Salad"
-                  class="img-cover">
-              </figure>
-              <div>
-                <div class="title-wrapper">
-                  <h3 class="title-3">
-                    <a href="#" class="card-title">Greek Salad</a>
-                  </h3>
-                  <span class="badge label-1">Seasonal</span>
-                  <span class="span title-2">$25.50</span>
-                </div>
-                <p class="card-text label-1">
-                  Tomatoes, green bell pepper, sliced cucumber onion, olives, and feta cheese.
-                </p>
-              </div>
+<!-- Full Menu Section -->
+<section class="section" id="full-menu">
+  <div class="container">
+    <h2 class="headline-1 text-center">Our Full Menu</h2>
+    <ul class="grid-list">
+      <!-- Sample full menu items -->
+      <li>
+        <div class="menu-card hover:card">
+          <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
+            <img src="/Public/images/menu-1.png" width="100" height="100" loading="lazy" alt="Greek Salad" class="img-cover">
+          </figure>
+          <div>
+            <div class="title-wrapper">
+              <h3 class="title-3">
+                <a href="#" class="card-title">Greek Salad</a>
+              </h3>
+              <span class="badge label-1">Seasonal</span>
+              <span class="span title-2">$25.50</span>
             </div>
-          </li>
-          <!-- Repeat for other menu items -->
-        </ul>
-      </div>
-    </section>
+            <p class="card-text label-1">
+              Tomatoes, green bell pepper, sliced cucumber onion, olives, and feta cheese.
+            </p>
+          </div>
+        </div>
+      </li>
+      <!-- Repeat for other menu items -->
+    </ul>
+  </div>
+</section>
 
 
 
@@ -932,7 +1086,8 @@
     - #FOOTER
   -->
 
-  <footer class="footer section has-bg-image text-center" style="background-image: url(' images/footer-bg.jpg')">
+  <footer class="footer section has-bg-image text-center"
+    style="background-image: url('/Public/images/footer-bg.jpg')">
     <div class="container">
 
       <div class="footer-top grid-list">
@@ -940,7 +1095,7 @@
         <div class="footer-brand has-before has-after">
 
           <a href="#" class="logo">
-            <img src=" images/OGLogo.png" width="160" height="50" loading="lazy" alt="relaxing koala home">
+            <img src="/Public/images/OGLogo.png" width="160" height="50" loading="lazy" alt="relaxing koala home">
           </a>
 
           <address class="body-4">
@@ -1036,7 +1191,8 @@
       <div class="footer-bottom">
 
         <p class="copyright">
-          &copy; 2024 Relaxing Koala. All Rights Reserved <a target="_blank" class="link"></a>
+          &copy; 2024 Relaxing Koala. All Rights Reserved <a 
+            target="_blank" class="link"></a>
         </p>
 
       </div>
@@ -1063,7 +1219,7 @@
   <!-- 
     - custom js link
   -->
-  <script src=" js/script.js"></script>
+  <script src="/Public/js/script.js"></script>
 
   <!-- 
     - ionicon link

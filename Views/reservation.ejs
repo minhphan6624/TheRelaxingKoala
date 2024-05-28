@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Reservations - Relaxing Koala Restaurant</title>
+
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
@@ -16,19 +18,32 @@
     </header>
     <main>
         <h2>Make a Reservation</h2>
-        <form id="reservation-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br>
-            <label for="contact">Contact Information:</label>
-            <input type="text" id="contact" name="contact" required><br>
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required><br>
-            <label for="time">Time:</label>
-            <input type="time" id="time" name="time" required><br>
-            <label for="num_people">Number of People:</label>
-            <input type="number" id="num_people" name="num_people" required><br>
-            <button type="submit">Submit</button>
-        </form>
+        <div class="reservation-form-container">
+            <form id="reservation-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="contact">Contact Info:</label>
+                <input type="text" id="contact" name="contact" required>
+                
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+                
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+                
+                <label for="num_guests">Number of Guests:</label>
+                <input type="number" id="num_guests" name="num_guests" required>
+                
+                <label for="requests">Special Requests:</label>
+                <textarea id="requests" name="requests"></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+
+        
         <script>
             document.getElementById('reservation-form').addEventListener('submit', async (event) => {
                 event.preventDefault();
@@ -38,7 +53,8 @@
                     contact: formData.get('contact'),
                     date: formData.get('date'),
                     time: formData.get('time'),
-                    num_people: formData.get('num_people')
+                    num_guests: formData.get('num_people'),
+                    special_request: formData.get('requests')
                 };
 
                 const response = await fetch('/api/reservation', {
@@ -60,3 +76,17 @@
     </main>
 </body>
 </html>
+
+<!-- <form id="reservation-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="contact">Contact Information:</label>
+            <input type="text" id="contact" name="contact" required><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required><br>
+            <label for="num_people">Number of People:</label>
+            <input type="number" id="num_people" name="num_people" required><br>
+            <button type="submit">Submit</button>
+        </form> -->
