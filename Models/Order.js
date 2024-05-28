@@ -1,10 +1,4 @@
 export default class Order {
-
-  
-
-
-
-
   constructor(orderData) {
     this.orderID = orderData.orderID;
     this.orderDateTime = orderData.orderDateTime || new Date();
@@ -30,4 +24,42 @@ export default class Order {
     }
   }
 
+  //Store the details of the current Order to the DB
+  save(callback) {
+    const sql = `INSERT INTO Orders (orderDateTime, totalAmount, status, specialInstructions, paymentStatus, customerId, tableId, fohStaffId, orderItems) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const params = [this.orderDateTime, this.totalAmount, this.status, this.specialInstructions, this.paymentStatus, this.customerId, this.tableId, this.fohStaffId, this.orderItems];
+    db.run(sql, params, (result) => {
+        if (result && result.lastID) {
+            this.orderID = result.lastID;
+            callback(null, this);
+        } else {
+            callback(new Error('Error saving order'));
+        }
+    });
+    }
+
+  //Find an order by ID
+  static findById(id, callback) {
+    const sql = `SELECT * FROM Orders WHERE id = ?`;
+    db.get(sql, [id], (row) => {
+        if (row) {
+            row.orderItems = JSON.parse(row.orderItems);
+            callback(null, new Order(row));
+        } else {
+            callback(new Error('Order not found'));
+        }
+    });
+  }
+
+  //Get all orders
+  static getAll(callback) {
+    const sql = `SELECT * FROM Orders`;
+    db.all(sql, [], (rows) => {
+        rows.forEach(row => {
+            row.orderItems = JSON.parse(row.orderItems);
+        });
+        callback(null, rows.map(row => new Order(row)));
+    });
+}
 }

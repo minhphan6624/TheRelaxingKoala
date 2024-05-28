@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const orderController = require('../controllers/orderController');
+const Order = require('../Models/Order');
 
 // Route to display the order form
 router.get('/new', orderController.createOrderForm);
