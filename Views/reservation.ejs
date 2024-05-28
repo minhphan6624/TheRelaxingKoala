@@ -46,8 +46,12 @@
         
         <script>
             document.getElementById('reservation-form').addEventListener('submit', async (event) => {
+                
                 event.preventDefault();
+                
                 const formData = new FormData(event.target);
+                
+                //Create a new data object based on what is submitted to the form
                 const data = {
                     name: formData.get('name'),
                     contact: formData.get('contact'),
@@ -57,6 +61,7 @@
                     special_request: formData.get('requests')
                 };
 
+                
                 const response = await fetch('/api/reservation', {
                     method: 'POST',
                     headers: {

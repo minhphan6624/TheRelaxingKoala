@@ -7,6 +7,7 @@ const port = 3000;
 
 //Set up view engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'Views'));
 
 //Middleware to parse JSON bodies
 app.use(bodyParser.json());
@@ -14,23 +15,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(express.static(path.join(__dirname, 'Views')));
 
-//Home page route
-app.get('/', (req, res) => {
-    res.render('index');
-});
+// Import routes
+const indexRoutes = require('./Routes/indexRoutes');
+const reservationRoutes = require('./Routes/reservationRoutes');
 
-//Menu route
-app.get('/menu', (req, res) => {
-    res.render('menu')
-})
-
-app.get('/reservation', (req, res) => {
-    res.render('reservation')
-})
-
-app.get('/order', (req, res) => {
-    res.render('order')
-})
+//Use routes
+app.use('/', indexRoutes);
+app.use('/api/reservation', reservationRoutes);
 
 //Start the server
 app.listen(port, () => {
