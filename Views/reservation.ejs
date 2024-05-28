@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations - Relaxing Koala Restaurant</title>
+</head>
+<body>
+    <header>
+        <h1>Reservations</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/order">Order</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Make a Reservation</h2>
+        <form id="reservation-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="contact">Contact Information:</label>
+            <input type="text" id="contact" name="contact" required><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required><br>
+            <label for="time">Time:</label>
+            <input type="time" id="time" name="time" required><br>
+            <label for="num_people">Number of People:</label>
+            <input type="number" id="num_people" name="num_people" required><br>
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+            document.getElementById('reservation-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = {
+                    name: formData.get('name'),
+                    contact: formData.get('contact'),
+                    date: formData.get('date'),
+                    time: formData.get('time'),
+                    num_people: formData.get('num_people')
+                };
+
+                const response = await fetch('/api/reservation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Reservation made successfully!');
+                    event.target.reset();
+                } else {
+                    alert('Error making reservation.');
+                }
+            });
+        </script>
+    </main>
+</body>
+</html>

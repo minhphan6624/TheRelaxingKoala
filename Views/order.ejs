@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order - Relaxing Koala Restaurant</title>
+</head>
+<body>
+    <header>
+        <h1>Order</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/menu">Menu</a>
+            <a href="/reservation">Reservations</a>
+            <a href="/contact">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Place Your Order</h2>
+        <form id="order-form">
+            <label for="items">Items:</label>
+            <textarea id="items" name="items" required></textarea><br>
+            <label for="total_price">Total Price:</label>
+            <input type="number" id="total_price" name="total_price" required><br>
+            <label for="address">Delivery Address:</label>
+            <input type="text" id="address" name="address" required><br>
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+            document.getElementById('order-form').addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const formData = new FormData(event.target);
+                const data = {
+                    items: formData.get('items'),
+                    total_price: formData.get('total_price'),
+                    address: formData.get('address')
+                };
+
+                const response = await fetch('/api/order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert('Order placed successfully!');
+                    event.target.reset();
+                } else {
+                    alert('Error placing order.');
+                }
+            });
+        </script>
+    </main>
+</body>
+</html>
