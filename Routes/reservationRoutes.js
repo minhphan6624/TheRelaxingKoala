@@ -32,12 +32,12 @@ router.post('/', (req, res) => {
     const reservation = new Reservation(req.body);
 
     //Store the Reservation information to the database instace
-    reservation.save((err, savedReservation) => {
+    reservation.save((err, savedReservationID) => {
         if (err) {
-            return res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err });
         }
         
-        return res.status(200).json({ savedReservation });
+        return res.status(201).json(savedReservationID);
     })
 });
 
@@ -47,12 +47,12 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
 
     //Fetch all recorded reservations from the DB
-    Reservation.getAll((err, allReservations) => {
+    Reservation.getAll((err, reservations) => {
         if (err) {
-            return res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err });
         }
 
-        return res.status(200).json({ allReservations });
+        return res.status(200).json(reservations);
         
     })
 });
@@ -61,13 +61,13 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Reservation.findById(req.params.id, (err, reservation) => {
         if (err) {
-            return res.status(500).json({ error: err.message });
+            return res.status(500).json({ error: err });
         }
         else if (!reservation) {
             return res.status(404).json({ error: 'Reservation not found!' });
         }
         
-        return res.status(200).json({ reservation });
+        return res.status(200).json(reservation );
         
     })
 });

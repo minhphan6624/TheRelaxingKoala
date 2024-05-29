@@ -17,11 +17,11 @@ class Reservation {
                      VALUES (?, ?, ?, ?, ?, ?)`;
         const params = [this.name, this.contact, this.date, this.time, this.num_people, this.requests];
 
-        db.run(sql, params, function (err) {
+        db.run(sql, params, (err, result) => {
             if (err) {
                 callback(err);
             } else {
-                callback(null, { id: this.id });
+                callback(null, result.lastID); //Return the ID of the last inserted row
             }
         });
     }
@@ -45,7 +45,7 @@ class Reservation {
 
         db.all(sql, [], (err, rows) => {
             if (err) {
-                callback(err);
+                callback(err, null);
             } else {
                 callback(null, rows.map(row => new Reservation(row)));
             }

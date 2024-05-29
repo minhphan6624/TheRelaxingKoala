@@ -36,7 +36,7 @@ class Database {
       if (err) {
         console.error('Error running sql', err);
       } else {
-        callback(this); // Provides context such as `lastID`
+        callback(null, this); // Provides context: `lastID` and `changes`
       }
     });
   }
@@ -46,7 +46,7 @@ class Database {
       if (err) {
         console.error('Error running sql', err);
       } else {
-        callback(rows); // Returns an array of rows
+        callback(null, rows); // Returns an array of rows
       }
     });
   }
@@ -56,7 +56,7 @@ class Database {
       if (err) {
         console.error('Error running sql', err);
       } else {
-        callback(row); // Returns a single row
+        callback(null, row); // Returns a single row
       }
     });
   }
