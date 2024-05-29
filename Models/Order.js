@@ -1,4 +1,7 @@
-export default class Order {
+const db = require('../database');
+const OrderItem = require('./orderItem');
+
+class Order {
   constructor(orderData) {
     this.orderID = orderData.orderID;
     this.orderDateTime = orderData.orderDateTime || new Date();
@@ -64,3 +67,5 @@ export default class Order {
     });
   }
 }
+
+module.exports = Order

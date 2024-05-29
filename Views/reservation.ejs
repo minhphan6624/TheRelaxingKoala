@@ -44,6 +44,39 @@
             </form>
         </div>
 
+        <h2>Existing Reservations</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Contact</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Number of People</th>
+                    <th>Requests</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservations.forEach(function(reservation) { %>
+                    <tr>
+                        <td><%= reservation.id %></td>
+                        <td><%= reservation.name %></td>
+                        <td><%= reservation.contact %></td>
+                        <td><%= reservation.date %></td>
+                        <td><%= reservation.time %></td>
+                        <td><%= reservation.num_people %></td>
+                        <td><%= reservation.requests %></td>
+                        <td>
+                            <button onclick="editReservation(<%= reservation.id %>)">Edit</button>
+                            <button onclick="deleteReservation(<%= reservation.id %>)">Delete</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+
         <script>
             document.getElementById('reservation-form').addEventListener('submit', async (event) => {
 
@@ -77,6 +110,27 @@
                     alert('Error making reservation.');
                 }
             });
+
+            function deleteReservation(id) {
+            if (confirm('Are you sure you want to delete this reservation?')) {
+                fetch(`/api/reservations/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Error: ' + data.error);
+                    } else {
+                        alert('Reservation deleted successfully');
+                        location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the reservation.');
+                });
+            }
+        }
         </script>
     </main>
 </body>

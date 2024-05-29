@@ -31,8 +31,8 @@ class Database {
     const orderTable = `
             CREATE TABLE IF NOT EXISTS Orders (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT,
-                contact TEXT,
+                orderDateTime TEXT,
+                status TEXT,
                 date TEXT,
                 time TEXT,
                 num_people INTEGER,
