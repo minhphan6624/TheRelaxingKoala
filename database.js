@@ -28,6 +28,18 @@ class Database {
                 requests TEXT
             )`;
 
+    const orderTable = `
+            CREATE TABLE IF NOT EXISTS Orders (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                contact TEXT,
+                date TEXT,
+                time TEXT,
+                num_people INTEGER,
+                requests TEXT
+            )`;
+
+
     this.db.run(reservationTable);
   }
 

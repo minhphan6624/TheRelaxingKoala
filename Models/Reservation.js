@@ -11,10 +11,14 @@ class Reservation {
         this.requests = reservationData.requests || '';
     }
 
+// ---------------------CREATE Operations Methods---------------------
+
     // Save/insert the details of a reservation to the DB
     save(callback) {
+
         const sql = `INSERT INTO Reservations (name, contact, date, time, num_people, requests) 
                      VALUES (?, ?, ?, ?, ?, ?)`;
+
         const params = [this.name, this.contact, this.date, this.time, this.num_people, this.requests];
 
         db.run(sql, params, (err, result) => {
@@ -26,10 +30,15 @@ class Reservation {
         });
     }
 
+// ---------------------READ Operations Methods---------------------
     //Find a reservation by ID
     static findById(id, callback) {
+        
         const sql = `SELECT * FROM Reservations WHERE id = ?`;
-        db.get(sql, [id], (err, row) => {
+
+        const params = [id]
+
+        db.get(sql, params, (err, row) => {
             if (err) {
                 callback(new Error('Reservation not found'));
             } else {
@@ -52,6 +61,7 @@ class Reservation {
         });
     }
 
+// ---------------------Update Operations Methods---------------------
     //Update reservation details
     updateReservationDetails(details, callback) {
         this.name = details.name || this.name;
@@ -74,6 +84,20 @@ class Reservation {
             }
         });
     }
+
+// ---------------------DELETE Operations Methods---------------------
+    //Delete a reservation based on ID
+    static delete(id, callback) {
+        const sql = `DELETE FROM Reservations WHERE id = ?`;
+        db.run(sql, [id], (err) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, { message: 'Reservation deleted successfully'});
+            }
+        });
+    }
+
 }
 
 module.exports = Reservation;

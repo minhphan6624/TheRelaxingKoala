@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { body, validationResult } = require('express-validator');
 
-const Reservation = require('../Models/Reservation'); //Reservation models
+const Reservation = require('../Models/Reservation'); //Reservation model
 
 //Validation rules
 const reservationValidationRules = [
@@ -94,16 +94,27 @@ router.put('/:id', (req, res) => {
         }
         
         //Update the reservation using the request body
-        reservation.updateReservationDetails(req.body, (err, updatedReservation) => {
+        reservation.updateReservationDetails(req.body, (err) => {
             if (err) {
                 return res.status(500).json({ error: err.message }); //Server error
             } 
             
-            return res.status(200).json(updatedReservation);
+            return res.status(200).json({message: 'Reservation updated'});
             
         });
         
     });
+});
+
+//---------------------DELETE Operations---------------------
+router.delete('/:id', (req, res) => {
+    Reservation.delete(req.params.id, (err, result) => {
+        if (err){
+            return res.status(500).json({err: err.message})
+        }
+
+        return res.status(200).json(result);
+    })
 });
 
 module.exports = router;
