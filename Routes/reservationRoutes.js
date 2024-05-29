@@ -36,9 +36,8 @@ router.post('/', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        else {
-            return res.status(200).json({ savedReservation });
-        }
+        
+        return res.status(200).json({ savedReservation });
     })
 });
 
@@ -52,9 +51,9 @@ router.get('/', (req, res) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        else {
-            return res.status(200).json({ allReservations });
-        }
+
+        return res.status(200).json({ allReservations });
+        
     })
 });
 
@@ -67,9 +66,9 @@ router.get('/:id', (req, res) => {
         else if (!reservation) {
             return res.status(404).json({ error: 'Reservation not found!' });
         }
-        else {
-            return res.status(200).json({ reservation });
-        }
+        
+        return res.status(200).json({ reservation });
+        
     })
 });
 
@@ -93,16 +92,17 @@ router.put('/:id', (req, res) => {
         else if (!reservation) {
             return res.status(404).json({ error: "Reservation not found" }); //Return a 404 error
         }
-        else {
-            //Update the reservation using the request body
-            reservation.updateReservationDetails(req.body, (err, updatedReservation) => {
-                if (err) {
-                    return res.status(500).json({ error: err.message }); //Server error
-                } else {
-                    return res.status(200).json(updatedReservation);
-                }
-            });
-        }
+        
+        //Update the reservation using the request body
+        reservation.updateReservationDetails(req.body, (err, updatedReservation) => {
+            if (err) {
+                return res.status(500).json({ error: err.message }); //Server error
+            } 
+            
+            return res.status(200).json(updatedReservation);
+            
+        });
+        
     });
 });
 

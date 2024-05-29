@@ -17,13 +17,6 @@ class Database {
   }
 
   initialize() {
-    const userTable = `
-            CREATE TABLE IF NOT EXISTS Users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT,
-                password TEXT,
-                role TEXT
-            )`;
     const reservationTable = `
             CREATE TABLE IF NOT EXISTS Reservations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -34,30 +27,8 @@ class Database {
                 num_people INTEGER,
                 requests TEXT
             )`;
-    const orderTable = `
-            CREATE TABLE IF NOT EXISTS Orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                orderDateTime TEXT,
-                totalAmount REAL,
-                status TEXT,
-                specialInstructions TEXT,
-                paymentStatus TEXT,
-                customerId INTEGER,
-                tableId INTEGER,
-                fohStaffId INTEGER,
-                orderItems TEXT
-            )`;
-    const menuTable = `
-            CREATE TABLE IF NOT EXISTS MenuItems (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT,
-                price REAL,
-                category TEXT
-            )`;
 
-    this.db.run(userTable);
     this.db.run(reservationTable);
-    this.db.run(orderTable);
   }
 
   run(sql, params = [], callback = () => { }) {
@@ -91,7 +62,7 @@ class Database {
   }
 }
 
-const instance = new Database();
-Object.freeze(instance);
+const db = new Database();
+Object.freeze(db);
 
-module.exports = instance;
+module.exports = db;
