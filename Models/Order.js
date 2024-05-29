@@ -1,5 +1,5 @@
 const db = require('../database');
-const OrderItem = require('./orderItem');
+const OrderItem = require('./OrderItem');
 
 class Order {
   constructor(orderData) {

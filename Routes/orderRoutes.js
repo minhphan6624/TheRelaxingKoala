@@ -1,67 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const Order = require('../Models/Order'); //Order models
+const orderController = require('../Controllers/orderController'); //Order controller
 
-//Endpoint to create a reservation
-router.post('/', (req, res) => {
 
-    //Create a new Reservation object using the request body
-    const Order  = new Order(req.body);
+router.post('/', orderController.createOrder);//Create an order
 
-    //Store the Reservation information to the database instace
-    reservation.save((err, savedReservation) => {
-        if (err){
-            res.status(400).json({error: err.message});
-        }
-        else{
-            res.status(200).json({savedReservation});
-        }
-    })
-});
+router.get('/', orderController.getAllOrders); // Get all orders
+router.get('/:id', orderController.getOrderByID); // Get a single order by ID
 
-//Endpoint to get all reservations
-router.get('/', (req, res) => {
-    
-    //Fetch all recorded reservations from the DB
-    Reservation.getAll((err, allReservations) => {
-        if (err){
-            res.status(400).json({error: err.message});
-        }
-        else{
-            res.status(200).json({allReservations});
-        }
-    })
-});
+router.put('/:id', orderController.updateOrder); // Endpoint to update a reservation
 
-//Endpoint to get a single reservation by ID
-router.get('/:id', (res, res) => {
-    Reservation.findById(req.params.id, (err, reservation) => {
-        if (err){
-            res.status(400).json({error: err.message});
-        }
-        else{
-            res.status(200).json({reservation});
-        }
-    })
-});
+router.delete('/:id', orderController.deleteOrder); //Delete a reservation
 
-// Endpoint to update a reservation
-router.put('/:id', (req, res) => {
-
-    //Find the corresponding reservation
-    Reservation.findById(req.params.id, (err, reservation) => {
-        if (err) {
-            res.status(400).json({ error: err.message });
-        } else {
-            //Update the reservation using the request body
-            reservation.updateReservationDetails(req.body, (err, updatedReservation) => {
-                if (err) {
-                    res.status(400).json({ error: err.message });
-                } else {
-                    res.status(200).json(updatedReservation);
-                }
-            });
-        }
-    });
-});
+module.exports = router;
