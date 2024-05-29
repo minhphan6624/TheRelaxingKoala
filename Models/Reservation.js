@@ -8,19 +8,20 @@ class Reservation {
         this.date = reservationData.date;
         this.time = reservationData.time;
         this.num_people = reservationData.num_people;
+        this.requests = reservationData.requests || '';
     }
 
-    //Save the details of a reservation to the DB
+    // Save/insert the details of a reservation to the DB
     save(callback) {
-        const sql = `INSERT INTO Reservations (name, contact, date, time, num_people) 
-                     VALUES (?, ?, ?, ?, ?)`;
+        const sql = `INSERT INTO Reservations (name, contact, date, time, num_people, requests) 
+                     VALUES (?, ?, ?, ?, ?, ?)`;
         const params = [this.name, this.contact, this.date, this.time, this.num_people];
-        db.run(sql, params, (result) => {
-            if (result && result.lastID) {
-                this.reservationID = result.lastID;
-                callback(null, this);
+
+        db.run(sql, params, function (err) {
+            if (err) {
+                callback(err);
             } else {
-                callback(new Error('Error saving reservation'));
+                callback(null, { id: this.lastID });
             }
         });
     }
@@ -28,20 +29,26 @@ class Reservation {
     //Find a reservation by ID
     static findById(id, callback) {
         const sql = `SELECT * FROM Reservations WHERE id = ?`;
-        db.get(sql, [id], (row) => {
-            if (row) {
-                callback(null, new Reservation(row));
+        db.get(sql, [id], (err, row) => {
+            if (err) {
+                callback(err);
             } else {
-                callback(new Error('Reservation not found'));
+                callback(null, new Reservation(row));
             }
         });
     }
 
-    //Get all reservation
+    // Return a list of all reservations
     static getAll(callback) {
+
         const sql = `SELECT * FROM Reservations`;
-        db.all(sql, [], (rows) => {
-            callback(null, rows.map(row => new Reservation(row)));
+
+        db.all(sql, [], (err, rows) => {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, rows.map(row => new Reservation(row)));
+            }
         });
     }
 
@@ -52,7 +59,21 @@ class Reservation {
         this.date = details.date || this.date;
         this.time = details.time || this.time;
         this.num_people = details.num_people || this.num_people;
-        this.save(callback);
+
+        //Update the info of the Reservation
+
+        const sql = `UPDATE Reservations SET name = ?, contact = ?, date = ?, time = ?, num_people = ?, requests = ? WHERE id = ?`;
+
+        const params = [this.name, this.contact, this.date, this.time, this.num_people, this.requests, this.id];
+
+        db.run(sql, params, (err) => {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null);
+            }
+        })
     }
 }
 
