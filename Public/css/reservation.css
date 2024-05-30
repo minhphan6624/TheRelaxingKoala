@@ -3,8 +3,8 @@
 body {
     font-family: 'Georgia', serif;
     background-color: #f4f4f2;
-    margin: 0;
-    padding: 0;
+    margin: 20px auto;
+    padding: auto;
     color: #333;
 }
 
@@ -20,23 +20,6 @@ header h1 {
     font-size: 36px;
 }
 
-header nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-}
 
 .reservation-form-container {
     max-width: 600px;
@@ -80,15 +63,6 @@ header nav ul li a {
     background-color: #555;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #3a3939;
-    color: #fff;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
 .error-message {
     color: red;
     font-size: 14px;

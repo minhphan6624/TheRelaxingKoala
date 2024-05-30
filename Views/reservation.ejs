@@ -9,15 +9,8 @@
 </head>
 
 <body>
-    <header>
-        <h1>Reservations</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/menu">Menu</a>
-            <a href="/order">Make an order</a>
-            <a href="/Reservation">Make a reservation</a>
-        </nav>
-    </header>
+    <%- include('./Partials/navbar.ejs')%>
+
     <main>
         <h2>Make a Reservation</h2>
         <div class="reservation-form-container">
@@ -43,96 +36,65 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+    </main>
+    
+    <%- include('./Partials/footer.ejs') %>
 
-        <h2>Existing Reservations</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Contact</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Number of People</th>
-                    <th>Requests</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% reservations.forEach(function(reservation) { %>
-                    <tr>
-                        <td><%= reservation.id %></td>
-                        <td><%= reservation.name %></td>
-                        <td><%= reservation.contact %></td>
-                        <td><%= reservation.date %></td>
-                        <td><%= reservation.time %></td>
-                        <td><%= reservation.num_people %></td>
-                        <td><%= reservation.requests %></td>
-                        <!-- <td>
-                            <button onclick="editReservation(<%= reservation.id %>)">Edit</button>
-                            <button onclick="deleteReservation(<%= reservation.id %>)">Delete</button>
-                        </td> -->
-                    </tr>
-                <% }); %>
-            </tbody>
-        </table>
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', async (event) => {
 
-        <script>
-            document.getElementById('reservation-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
 
-                event.preventDefault();
+            const formData = new FormData(event.target);
 
-                const formData = new FormData(event.target);
-
-                //Create a new data object based on what is submitted to the form
-                const data = {
-                    name: formData.get('name'),
-                    contact: formData.get('contact'),
-                    date: formData.get('date'),
-                    time: formData.get('time'),
-                    num_guests: formData.get('num_people'),
-                    requests: formData.get('requests')
-                };
+            //Create a new data object based on what is submitted to the form
+            const data = {
+                name: formData.get('name'),
+                contact: formData.get('contact'),
+                date: formData.get('date'),
+                time: formData.get('time'),
+                num_guests: formData.get('num_people'),
+                requests: formData.get('requests')
+            };
 
 
-                const response = await fetch('/api/reservation', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    alert('Reservation made successfully!');
-                    event.target.reset();
-                } else {
-                    alert('Error making reservation.');
-                }
+            const response = await fetch('/api/reservation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
 
-            function deleteReservation(id) {
-            if (confirm('Are you sure you want to delete this reservation?')) {
-                fetch(`/api/reservations/${id}`, {
-                    method: 'DELETE'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert('Error: ' + data.error);
-                    } else {
-                        alert('Reservation deleted successfully');
-                        location.reload();
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while deleting the reservation.');
-                });
+            if (response.ok) {
+                alert('Reservation made successfully!');
+                event.target.reset();
+            } else {
+                alert('Error making reservation.');
             }
+        });
+
+        function deleteReservation(id) {
+        if (confirm('Are you sure you want to delete this reservation?')) {
+            fetch(`/api/reservations/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    alert('Reservation deleted successfully');
+                    location.reload();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the reservation.');
+            });
         }
-        </script>
-    </main>
+    }
+    </script>
 </body>
 
 </html>

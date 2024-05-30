@@ -19,7 +19,7 @@ header h1 {
     font-size: 36px;
 }
 
-header nav ul {
+/* header nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -35,7 +35,7 @@ header nav ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 18px;
-}
+} */
 
 .order-form-container {
     max-width: 600px;
@@ -83,12 +83,3 @@ header nav ul li a {
     margin-bottom: 10px;
 }
 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #3a3939;
-    color: #fff;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}

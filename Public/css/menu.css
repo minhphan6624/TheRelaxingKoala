@@ -7,6 +7,12 @@ body {
     color: #333;
 }
 
+h1 {
+    text-align: center;
+    margin: 20px auto;
+    padding: auto;
+}
+
 header {
     background-color: #c0baba;
     color: #fff;
@@ -18,24 +24,10 @@ header {
 header h1 {
     margin: 0;
     font-size: 36px;
-}
-
-header nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-header nav ul li {
-    margin: 0 15px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #3a3939;
 }
 
 .menu-container {
@@ -47,13 +39,6 @@ header nav ul li a {
     border-radius: 5px;
 }
 
-header h1 {
-    font-size: 32px;
-    text-align: center;
-    margin-bottom: 5px;
-    color: #3a3939;
-}
-
 .tagline {
     text-align: center;
     color: #6d6d6d;
@@ -62,9 +47,11 @@ header h1 {
 }
 
 .menu-section h2 {
+    text-align: center;
     font-size: 24px;
     color: #3a3939;
     padding: 10px 0;
+    margin:auto;
     border-bottom: 1px solid #d3d3d3;
 }
 

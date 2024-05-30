@@ -7,246 +7,54 @@
   <title>Menu</title>
   <link rel="stylesheet" href="css/menu.css">
 </head>
-  <header>
-    <h1>Our Menu</h1>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/menu">Menu</a>
-        <a href="/order">Make an order</a>
-        <a href="/Reservation">Make a reservation</a>
-    </nav>
-  </header>
 
-  <div class="menu-container">
-    <header>
-        <h1>The Relaxing Koala</h1>
-        <p class="tagline">Exquisite Dining Experience</p>
-    </header>
-    <section class="menu-section">
-        <h2>Entrees</h2>
-        <ul>
-            <li>Prawn Cocktail - $12 <span>Fresh prawns served with a tangy cocktail sauce</span></li>
-            <li>Garlic Bread - $5 <span>Grilled bread with garlic butter and herbs</span></li>
-        </ul>
-    </section>
-    <section class="menu-section">
-        <h2>Mains</h2>
-        <ul>
-            <li>Beef Lasagna - $18 <span>Layered pasta with rich beef sauce, topped with béchamel and cheese</span></li>
-            <li>Chicken Parmigiana - $17 <span>Breaded chicken breast, marinara sauce, and melted mozzarella cheese</span></li>
-        </ul>
-    </section>
-    <section class="menu-section">
-        <h2>Desserts</h2>
-        <ul>
-            <li>Fatto Tiramisu - $7 <span>Coffee liqueur-soaked sponge, mascarpone, chocolate</span></li>
-            <li>Scugnizielli Nutella & Gelato - $7.5 <span>Fried mini pizza doughnuts, Nutella, vanilla gelato</span></li>
-            <li>Affogato - $6 <span>Vanilla gelato, espresso</span></li>
-            <li>Affogato Limoncello (vg) - $7.5 <span>Lemon sorbet, limoncello</span></li>
-        </ul>
-    </section>
-    <section class="menu-section">
-        <h2>Drinks</h2>
-        <ul>
-            <li>Limoncello 35ml - $4</li>
-            <li>Espresso - $2.5</li>
-            <li>Macchiato - $2.5</li>
-            <li>Amaro del Capo 35ml - $4</li>
-        </ul>
-    </section>
-</div>
+<body>
+  <%- include('./Partials/navbar.ejs')  %>
+
+    <h1> Our menu </h1>
+    <div class="menu-container">
+        <header>
+            <h1>The Relaxing Koala</h1>
+            <p class="tagline">Exquisite Dining Experience</p>
+        </header>
+        
+        <section class="menu-section">
+            <h2>Entrees</h2>
+            <ul>
+                <li>Prawn Cocktail - $12 <span>Fresh prawns served with a tangy cocktail sauce</span></li>
+                <li>Garlic Bread - $5 <span>Grilled bread with garlic butter and herbs</span></li>
+            </ul>
+        </section>
+
+        <section class="menu-section">
+            <h2>Mains</h2>
+            <ul>
+                <li>Beef Lasagna - $18 <span>Layered pasta with rich beef sauce, topped with béchamel and cheese</span></li>
+                <li>Chicken Parmigiana - $17 <span>Breaded chicken breast, marinara sauce, and melted mozzarella cheese</span></li>
+            </ul>
+        </section>
+        
+        <section class="menu-section">
+            <h2>Desserts</h2>
+            <ul>
+                <li>Fatto Tiramisu - $7 <span>Coffee liqueur-soaked sponge, mascarpone, chocolate</span></li>
+                <li>Scugnizielli Nutella & Gelato - $7.5 <span>Fried mini pizza doughnuts, Nutella, vanilla gelato</span></li>
+                <li>Affogato - $6 <span>Vanilla gelato, espresso</span></li>
+                <li>Affogato Limoncello (vg) - $7.5 <span>Lemon sorbet, limoncello</span></li>
+            </ul>
+        </section>
+        <section class="menu-section">
+            <h2>Drinks</h2>
+            <ul>
+                <li>Limoncello 35ml - $4</li>
+                <li>Espresso - $2.5</li>
+                <li>Macchiato - $2.5</li>
+                <li>Amaro del Capo 35ml - $4</li>
+            </ul>
+        </section>
+    </div>
+
+    <%- include('./Partials/footer.ejs') %>
 </body>
 
 </html>
-
-<!-- <section class="section menu" aria-label="menu-label" id="menu">
-    <div class="container">
-
-      <p class="section-subtitle text-center label-2">Special Selection</p>
-
-      <h2 class="headline-1 section-title text-center">Delicious Menu</h2>
-
-      <ul class="grid-list">
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-1.png" width="100" height="100" loading="lazy" alt="Greek Salad" class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Greek Salad</a>
-                </h3>
-
-                <span class="badge label-1">Seasonal</span>
-
-                <span class="span title-2">$25.50</span>
-              </div>
-
-              <p class="card-text label-1">
-                Tomatoes, green bell pepper, sliced cucumber onion, olives, and feta cheese.
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-2.png" width="100" height="100" loading="lazy" alt="Lasagne" class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Lasagne</a>
-                </h3>
-
-                <span class="span title-2">$40.00</span>
-              </div>
-
-              <p class="card-text label-1">
-                Vegetables, cheeses, ground meats, tomato sauce, seasonings and spices
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-3.png" width="100" height="100" loading="lazy" alt="Butternut Pumpkin"
-                class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Butternut Pumpkin</a>
-                </h3>
-
-                <span class="span title-2">$10.00</span>
-              </div>
-
-              <p class="card-text label-1">
-                Typesetting industry lorem Lorem Ipsum is simply dummy text of the priand.
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-4.png" width="100" height="100" loading="lazy" alt="Tokusen Wagyu"
-                class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Tokusen Wagyu</a>
-                </h3>
-
-                <span class="badge label-1">New</span>
-
-                <span class="span title-2">$39.00</span>
-              </div>
-
-              <p class="card-text label-1">
-                Vegetables, cheeses, ground meats, tomato sauce, seasonings and spices.
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-5.png" width="100" height="100" loading="lazy" alt="Olivas Rellenas"
-                class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Olivas Rellenas</a>
-                </h3>
-
-                <span class="span title-2">$25.00</span>
-              </div>
-
-              <p class="card-text label-1">
-                Avocados with crab meat, red onion, crab salad stuffed red bell pepper and green bell
-                pepper.
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-        <li>
-          <div class="menu-card hover:card">
-
-            <figure class="card-banner img-holder" style="--width: 100; --height: 100;">
-              <img src=" images/menu-6.png" width="100" height="100" loading="lazy" alt="Opu Fish" class="img-cover">
-            </figure>
-
-            <div>
-
-              <div class="title-wrapper">
-                <h3 class="title-3">
-                  <a href="#" class="card-title">Opu Fish</a>
-                </h3>
-
-                <span class="span title-2">$49.00</span>
-              </div>
-
-              <p class="card-text label-1">
-                Vegetables, cheeses, ground meats, tomato sauce, seasonings and spices
-              </p>
-
-            </div>
-
-          </div>
-        </li>
-
-      </ul>
-
-      <p class="menu-text text-center">
-        During winter daily from <span class="span">7:00 pm</span> to <span class="span">9:00 pm</span>
-      </p>
-
-      <a href="#Order" class="btn btn-primary">
-        <span class="text text-1"> Make an order now!</span>
-        <span class="text text-2" aria-hidden="true">Make an order now!</span>
-      </a>
-
-      <img src=" images/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
-        class="shape shape-2 move-anim">
-      <img src=" images/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
-        class="shape shape-3 move-anim">
-
-    </div>
-  </section> -->
