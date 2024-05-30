@@ -3,6 +3,7 @@ const db = require('../database');
 class Payment {
   constructor(paymentData) {
     this.id = paymentData.id;
+    this.orderID = paymentData.orderID;
     this.amount = paymentData.amount;
     this.method = paymentData.method;
     this.date = paymentData.date || new Date().toISOString();

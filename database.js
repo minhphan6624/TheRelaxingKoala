@@ -28,27 +28,66 @@ class Database {
                 requests TEXT
             )`;
 
-    const createUserTable = `
-        CREATE TABLE IF NOT EXISTS Users (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          username TEXT,
-          password TEXT,
-          role TEXT
-        )`;
-
     const createOrderTable = `
-            CREATE TABLE IF NOT EXISTS Orders (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                orderDateTime TEXT,
-                status TEXT,
-                date TEXT,
-                time TEXT,
-                num_people INTEGER,
-                requests TEXT
+          CREATE TABLE IF NOT EXISTS Orders (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_name TEXT NOT NULL,
+            order_date TEXT NOT NULL,
+            status TEXT NOT NULL,
+            order_type TEXT NOT NULL,
+            table_id INTEGER,
+            delivery_address TEXT,
+            FOREIGN KEY (table_id) REFERENCES Tables(id)
             )`;
-
+    
+    const createOrderItemTable = `
+            CREATE TABLE IF NOT EXISTS OrderItems (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              order_id INTEGER NOT NULL,
+              menu_item_id INTEGER NOT NULL,
+              quantity INTEGER NOT NULL,
+              price REAL NOT NULL,
+              notes TEXT,
+              FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE,
+              FOREIGN KEY (menu_item_id) REFERENCES MenuItems(id)
+            )`;
+    const createMenuItemTable = `
+            CREATE TABLE IF NOT EXISTS MenuItems (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              name TEXT NOT NULL,
+              description TEXT,
+              price REAL NOT NULL,
+              category TEXT NOT NULL
+            )`;
+    const createTableTable = `
+            CREATE TABLE IF NOT EXISTS Tables (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              number INTEGER NOT NULL,
+              capacity INTEGER NOT NULL,
+              status TEXT NOT NULL
+            )`;
+      
+    const createPaymentTable = `
+            CREATE TABLE IF NOT EXISTS Payments (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              order_id INTEGER NOT NULL,
+              payment_method TEXT NOT NULL,
+              amount REAL NOT NULL,
+              payment_date TEXT NOT NULL,
+              FOREIGN KEY (order_id) REFERENCES Orders(id)
+            )`;
+    
+    // const createUserTable = `
+    //     CREATE TABLE IF NOT EXISTS Users (
+    //       id INTEGER PRIMARY KEY AUTOINCREMENT,
+    //       username TEXT,
+    //       password TEXT,
+    //       role TEXT
+    //     )`;
 
     this.db.run(createReservationTable);
+    this.db.run(createOrderTable);
+    this.db.run(createOrderItemTable);
   }
 
   run(sql, params = [], callback = () => { }) {
