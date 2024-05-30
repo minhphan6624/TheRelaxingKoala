@@ -88,6 +88,8 @@ class Database {
     this.db.run(createReservationTable);
     this.db.run(createOrderTable);
     this.db.run(createOrderItemTable);
+    this.db.run(createMenuItemTable);
+    this.db.run(createTableTable);
   }
 
   run(sql, params = [], callback = () => { }) {

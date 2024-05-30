@@ -13,18 +13,17 @@ class Order {
 
     this.order_type = orderData.order_type; // "Eat-in", "Takeaway", "Delivery"
 
-    this.tableID = orderData.order_type === 'Dine-in' ? orderData.tableID : null;
+    this.table_id = orderData.order_type === 'Dine-in' ? orderData.table_id : null;
     
     this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : null;
     // this.customer_contact = orderData.customer_contact;
-    
-    
-    // this.notes = orderData.notes || '';
+
   }
 
   //Insert a new order to the DB
   save(callback) {
     const sql = `INSERT INTO Orders (customer_name, order_date, status, order_type, table_id, delivery_address) VALUES (?, ?, ?, ?, ?, ?)`;
+
     const params = [this.customer_name, this.order_date, this.status, this.order_type, this.table_id, this.delivery_address];
 
     db.run(sql, params, function(err) {

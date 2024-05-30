@@ -1,4 +1,4 @@
-const Order = requrie('../Models/Order');
+const Order = require('../Models/Order');
 const OrderItem = require('../Models/OrderItem');
 const MenuItem = require('../Models/MenuItem');
 // -------------- Order Routes --------------
@@ -17,7 +17,7 @@ exports.createOrder = (req, res) => {
     delivery_address: order_type === 'delivery' ? delivery_address : null
     };
 
-    const order = new Order(orderdata);
+    const order = new Order(orderData);
 
     //Store the order information to the database instace
     order.save((err, newOrderID) => {

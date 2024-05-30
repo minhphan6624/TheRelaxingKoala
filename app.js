@@ -24,10 +24,14 @@ app.use(express.static(path.join(__dirname, 'Views')));
 const indexRoutes = require('./Routes/indexRoutes');
 const reservationRoutes = require('./Routes/reservationRoutes');
 // const userRoutes = require('./Routes/userRoutes');
+const orderRoutes = require('./Routes/orderRoutes');
+const menuRoutes = require('./Routes/menuRoutes');
 
 //Use routes
 app.use('/', indexRoutes);
 app.use('/api/reservation', reservationRoutes);
+app.use('/api/order', orderRoutes);
+app.use('/api/menu', menuRoutes);
 // app.use('/api/user', userRoutes);
 
 //Start the server
