@@ -3,16 +3,7 @@ const OrderItem = require('./OrderItem');
 
 class Order {
   constructor(orderData) {
-    // this.orderID = orderData.orderID;
-    // this.orderDateTime = orderData.orderDateTime || new Date();
-    // this.totalAmount = orderData.totalAmount;
-    // this.status = orderData.status || 'pending';
-    // this.specialInstructions = orderData.specialInstructions || null;
-    // this.paymentStatus = orderData.paymentStatus || 'unpaid';
-    // this.customerId = orderData.customerId;
-    // this.tableId = orderData.tableId || null;
-    // this.fohStaffId = orderData.fohStaffId;
-    // this.orderItems = orderData.orderItems || [];
+    
 
     this.id = orderData.id;
 
@@ -23,9 +14,10 @@ class Order {
     
     this.total_price = orderData.total_price;
 
-    this.status = orderData.status || 'Pending';
+    this.status = orderData.status || 'In progress'; // "In progress", "Finished" For KitchenStaff to update
     
     this.order_date = orderData.order_date || new Date().toISOString();
+
     this.order_type = orderData.order_type; // "Eat-in", "Takeaway", "Delivery"
     this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : '';
     
@@ -126,3 +118,14 @@ class Order {
 }
 
 module.exports = Order
+
+// this.orderID = orderData.orderID;
+    // this.orderDateTime = orderData.orderDateTime || new Date();
+    // this.totalAmount = orderData.totalAmount;
+    // this.status = orderData.status || 'pending';
+    // this.specialInstructions = orderData.specialInstructions || null;
+    // this.paymentStatus = orderData.paymentStatus || 'unpaid';
+    // this.customerId = orderData.customerId;
+    // this.tableId = orderData.tableId || null;
+    // this.fohStaffId = orderData.fohStaffId;
+    // this.orderItems = orderData.orderItems || [];

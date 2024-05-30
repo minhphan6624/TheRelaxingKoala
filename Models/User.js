@@ -1,35 +1,53 @@
-import e from "express";
+const db = require('../database');
 
-let lastId = 0;
+class User {
+  constructor(userData) {
+    this.id = userData.id;
+    this.username = userData.username;
+    this.password = userData.password; // Use hashing for passwords
+    this.role = userData.role; // 'staff' or 'manager'
+  }
 
-export default class User { 
-  constructor(firstName, lastName, mobileNumber, emailAddress, userType) {
-    if (!firstName || !lastName || !mobileNumber || !emailAddress || !userType) {
-      throw new Error("All fields are required.");
-    }
-    this.id = lastId++;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.mobileNumber = mobileNumber;
-    this.emailAddress = emailAddress;
-    this.userType = userType;
+  //Add a new user to the db
+  save(callback) {
+    const sql = `INSERT INTO Users (username, password, role) VALUES (?, ?, ?)`;
+
+    const params = [this.username, this.password, this.role];
+
+    db.run(sql, params, function(err) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, { id: this.lastID });
+      }
+    });
+  }
+
+  //Find a user by Username
+  static findByUsername(username, callback) {
+    const sql = `SELECT * FROM Users WHERE username = ?`;
+
+    db.get(sql, [username], (err, row) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, new User(row));
+      }
+    });
+  }
+
+  //Find a user by ID
+  static findById(id, callback) {
+    const sql = `SELECT * FROM Users WHERE id = ?`;
+
+    db.get(sql, [id], (err, row) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, new User(row));
+      }
+    });
   }
 }
 
-class FOHStaff extends User {
-  constructor(id, firstName, lastName, mobileNumber, emailAddress, userType="FOHStaff") {
-    super(id, firstName, lastName, mobileNumber, emailAddress, userType);
-  }
-}
-
-class KitchenStaff extends User {
-  constructor(id, firstName, lastName, mobileNumber, emailAddress, userType="KitchenStaff") {
-    super(id, firstName, lastName, mobileNumber, emailAddress, userType);
-  }
-}
-
-class Manager extends User {
-  constructor(id, firstName, lastName, mobileNumber, emailAddress, userType="Manager") {
-    super(id, firstName, lastName, mobileNumber, emailAddress, userType);
-  }
-}
+module.exports = User;

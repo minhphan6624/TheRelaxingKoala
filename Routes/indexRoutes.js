@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const Reservation = require('../Models/Reservation'); // Reservation model
-
 //Home page route
 router.get('/', (req, res) => {
     res.render('index');
@@ -23,6 +21,10 @@ router.get('/order', (req, res) => {
 
 router.get('/login', (req, res) => {
     res.render('login')
+})
+
+router.get('/register', (req, res) => {
+    res.render('register')
 })
 
 module.exports = router;

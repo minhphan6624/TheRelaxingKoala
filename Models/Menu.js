@@ -9,6 +9,7 @@ class Menu {
     this.items = menuData.items || [];  // Initialize items array
   }
 
+  //Insert a menu to the DB
   save(callback) {
     const sql = `INSERT INTO Menus (name, description) VALUES (?, ?)`;
     const params = [this.name, this.description];
@@ -21,6 +22,7 @@ class Menu {
     });
   }
 
+  //Find a menu by ID
   static findById(id, callback) {
     const sql = `SELECT * FROM Menus WHERE id = ?`;
     db.get(sql, [id], (err, menuRow) => {
@@ -43,6 +45,7 @@ class Menu {
     });
   }
 
+  //Get all menus
   static getAll(callback) {
     const sql = `SELECT * FROM Menus`;
     db.all(sql, [], (err, rows) => {

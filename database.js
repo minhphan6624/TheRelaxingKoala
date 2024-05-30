@@ -17,7 +17,7 @@ class Database {
   }
 
   initialize() {
-    const reservationTable = `
+    const createReservationTable = `
             CREATE TABLE IF NOT EXISTS Reservations (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
@@ -27,6 +27,14 @@ class Database {
                 num_people INTEGER,
                 requests TEXT
             )`;
+
+    const createUserTable = `
+        CREATE TABLE IF NOT EXISTS Users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          username TEXT,
+          password TEXT,
+          role TEXT
+        )`;
 
     const orderTable = `
             CREATE TABLE IF NOT EXISTS Orders (
@@ -40,7 +48,7 @@ class Database {
             )`;
 
 
-    this.db.run(reservationTable);
+    this.db.run(createReservationTable);
   }
 
   run(sql, params = [], callback = () => { }) {

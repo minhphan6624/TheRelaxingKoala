@@ -4,8 +4,9 @@
     <title>Login</title>
 </head>
 <body>
+    <%- include('./Partials/navbar.ejs')  %>
     <h1>Login</h1>
-    <form action="/users/login" method="POST">
+    <form action="/login" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
         <br>

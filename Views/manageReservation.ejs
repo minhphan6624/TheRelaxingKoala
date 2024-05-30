@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reservations</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Manage Reservations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer Name</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Table</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservations.forEach(reservation => { %>
+                <tr>
+                    <td><%= reservation.id %></td>
+                    <td><%= reservation.customer_name %></td>
+                    <td><%= reservation.customer_contact %></td>
+                    <td><%= reservation.date %></td>
+                    <td><%= reservation.time %></td>
+                    <td><%= reservation.table_id %></td>
+                    <td>
+                        <form action="/api/foh/reservations/<%= reservation.id %>" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="PUT">
+                            <button type="submit">Update</button>
+                        </form>
+                        <form action="/api/foh/reservations/<%= reservation.id %>" method="post" style="display:inline;">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+
+    <h2>Create New Reservation</h2>
+    <form action="/api/foh/reservations" method="post">
+        <label for="customer_name">Customer Name:</label>
+        <input type="text" id="customer_name" name="customer_name" required>
+        <label for="customer_contact">Contact:</label>
+        <input type="text" id="customer_contact" name="customer_contact" required>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+        <label for="table_id">Table:</label>
+        <select id="table_id" name="table_id" required>
+            <% tables.forEach(table => { %>
+                <option value="<%= table.id %>"><%= table.number %></option>
+            <% }); %>
+        </select>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>
