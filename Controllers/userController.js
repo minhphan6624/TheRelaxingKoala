@@ -2,7 +2,6 @@ const User = require('../Models/User');
 const Staff = require('../models/Staff');
 const Manager = require('../models/Manager');
 const bcrypt = require('bcrypt'); //For hashing and comparing hased passwords
-const jwt = require('jsonwebtoken');
 
 //Resgister a new user
 exports.register = (req, res) => {
@@ -57,32 +56,24 @@ exports.login = (req, res) => {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        const token = jwt.sign({ id: user.id, role: user.role }, 'your_jwt_secret', { expiresIn: '1h' });
-        res.status(200).json({ token });
+    // Create session
+    req.session.userId = user.id;
+    req.session.role = user.role;
+    res.status(200).json({ message: 'Login successful' });
     });
 
     });
 };
 
-exports.authenticate = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ error: 'Access denied' });
-  }
-  jwt.verify(token, 'your_jwt_secret', (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ error: 'Invalid token' });
-    }
-    req.user = decoded;
-    next();
-  });
-};
+//Log out
+exports.logout = (req, res) => {
 
-exports.authorize = (roles) => {
-  return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return res.status(403).json({ error: 'Forbidden' });
-    }
-    next();
-  };
+    //Destroy session
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      
+      res.status(200).json({ message: 'Logout successful' });
+    });
 };

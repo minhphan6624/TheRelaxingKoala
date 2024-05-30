@@ -8,7 +8,7 @@ class Order {
     this.id = orderData.id;
 
     this.customer_name = orderData.customer_name;
-    this.customer_contact = orderData.customer_contact;
+  
     
     this.items = orderData.items.map(item => new OrderItem(item));  // Convert to OrderItem objects
     
@@ -19,8 +19,11 @@ class Order {
     this.order_date = orderData.order_date || new Date().toISOString();
 
     this.order_type = orderData.order_type; // "Eat-in", "Takeaway", "Delivery"
-    this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : '';
+    this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : null;
+    this.customer_contact = orderData.customer_contact;
     
+    this.tableID = orderData.order_type === 'Dine-in' ? orderData.tableID : null;
+
     this.payment_id = orderData.payment_id || null;
 
     this.notes = orderData.notes || '';
