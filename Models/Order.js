@@ -8,15 +8,12 @@ class Order {
     this.id = orderData.id;
 
     this.customer_name = orderData.customer_name;
-  
-    
-    this.items = orderData.items.map(item => new OrderItem(item));  // Convert to OrderItem objects
+
+    this.order_date = orderData.order_date || new Date().toISOString();
     
     this.total_price = orderData.total_price;
 
     this.status = orderData.status || 'In progress'; // "In progress", "Finished" For KitchenStaff to update
-    
-    this.order_date = orderData.order_date || new Date().toISOString();
 
     this.order_type = orderData.order_type; // "Eat-in", "Takeaway", "Delivery"
     this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : null;
@@ -79,6 +76,7 @@ class Order {
         });
     }
 
+    //Update order details
     update(details, callback) {
         this.customer_name = details.customer_name || this.customer_name;
         this.customer_contact = details.customer_contact || this.customer_contact;
@@ -118,17 +116,48 @@ class Order {
             }
         });
     }
+
+    //Find an order based on ID along with all the associated OrderItems
+    static findWithItems(id, callback) {
+
+        const sql = `SELECT o.*, oi.id AS item_id, oi.menu_item_id, oi.quantity, oi.price, oi.special_instructions
+                        FROM Orders o
+                        LEFT JOIN OrderItems oi ON o.id = oi.order_id
+                        WHERE o.id = ?`;
+        
+        db.all(sql, [id], (err, rows) => {
+            if (err) {
+                callback(err);
+            } else if (rows.length === 0) {
+                callback(null, null);
+            } else {
+                const order = new Order(rows[0]);
+                
+                //Add the iterms to the order
+                order.items = rows.map(row => new OrderItem({
+                    id: row.item_id,
+                    order_id: row.id,
+                    menu_item_id: row.menu_item_id,
+                    quantity: row.quantity,
+                    price: row.price,
+                    special_instructions: row.special_instructions
+                }));
+            callback(null, order);
+            }
+        });
+    }
+
+    //Calculate order total
+    static calculateTotal(orderId, callback) {
+        const sql = `SELECT SUM(quantity * price) as total FROM OrderItems WHERE order_id = ?`;
+        db.get(sql, [orderId], (err, row) => {
+          if (err) {
+            callback(err, null);
+          } else {
+            callback(null, row.total);
+          }
+        });
+      }
 }
 
 module.exports = Order
-
-// this.orderID = orderData.orderID;
-    // this.orderDateTime = orderData.orderDateTime || new Date();
-    // this.totalAmount = orderData.totalAmount;
-    // this.status = orderData.status || 'pending';
-    // this.specialInstructions = orderData.specialInstructions || null;
-    // this.paymentStatus = orderData.paymentStatus || 'unpaid';
-    // this.customerId = orderData.customerId;
-    // this.tableId = orderData.tableId || null;
-    // this.fohStaffId = orderData.fohStaffId;
-    // this.orderItems = orderData.orderItems || [];
