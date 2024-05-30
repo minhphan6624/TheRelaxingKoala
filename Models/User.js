@@ -16,12 +16,6 @@ export default class User {
   }
 }
 
-class Customer extends User {
-  constructor(id, firstName, lastName, mobileNumber, emailAddress, userType="Customer") {
-    super(id, firstName, lastName, mobileNumber, emailAddress, userType);
-  }
-}
-
 class FOHStaff extends User {
   constructor(id, firstName, lastName, mobileNumber, emailAddress, userType="FOHStaff") {
     super(id, firstName, lastName, mobileNumber, emailAddress, userType);

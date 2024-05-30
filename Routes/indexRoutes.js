@@ -14,16 +14,11 @@ router.get('/menu', (req, res) => {
 })
 
 router.get('/reservation', (req, res) => {
-    Reservation.getAll((err, reservations) => {
-        if (err) {
-            return res.status(500).send('Error retrieving reservations');
-        }
-        res.render('reservation', { reservations });
-    });
+    res.render('createReservation')
 })
 
 router.get('/order', (req, res) => {
-    res.render('order')
+    res.render('createOrder')
 })
 
 router.get('/login', (req, res) => {

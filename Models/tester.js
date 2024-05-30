@@ -1,7 +1,6 @@
 
 import MenuItem from './Menu/MenuItem.mjs';
 import Menu from './Menu/Menu.mjs';
-import Customer from './User.js';
 import FOHStaff from './User.js';
 import KitchenStaff from './User.js';
 import Manager from './User.js';
