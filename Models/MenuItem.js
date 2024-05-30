@@ -3,19 +3,18 @@ const db = require('../database');
 class MenuItem {
   constructor(menuItemData) {
     this.id = menuItemData.id;
-    this.menu_id = menuItemData.menu_id;
     this.name = menuItemData.name;
     this.description = menuItemData.description;
     this.price = menuItemData.price;
+    this.category = menuItemData.category;
   }
 
   //Insert a new menuItem
   save(callback) {
-    const sql = `INSERT INTO MenuItems (menu_id, name, description, price) VALUES (?, ?, ?, ?)`;
-    
-    const params = [this.menu_id, this.name, this.description, this.price];
-    
-    db.run(sql, params, function (err) {
+    const sql = `INSERT INTO MenuItems (name, description, price, category) VALUES (?, ?, ?, ?)`;
+    const params = [this.name, this.description, this.price, this.category];
+
+    db.run(sql, params, function(err) {
       if (err) {
         callback(err);
       } else {
@@ -27,6 +26,7 @@ class MenuItem {
   //Find a MenuItem by ID
   static findById(id, callback) {
     const sql = `SELECT * FROM MenuItems WHERE id = ?`;
+
     db.get(sql, [id], (err, row) => {
       if (err) {
         callback(err);
@@ -52,12 +52,15 @@ class MenuItem {
 
   //Update a MenuItem by ID
   update(details, callback) {
-    this.menu_id = details.menu_id || this.menu_id;
     this.name = details.name || this.name;
     this.description = details.description || this.description;
     this.price = details.price || this.price;
-    const sql = `UPDATE MenuItems SET menu_id = ?, name = ?, description = ?, price = ? WHERE id = ?`;
-    const params = [this.menu_id, this.name, this.description, this.price, this.id];
+    this.category = details.category || this.category;
+
+    const sql = `UPDATE MenuItems SET name = ?, description = ?, price = ?, category = ? WHERE id = ?`;
+
+    const params = [this.name, this.description, this.price, this.category, this.id];
+
     db.run(sql, params, (err) => {
       if (err) {
         callback(err);
@@ -70,11 +73,12 @@ class MenuItem {
   //Delete a MenuItem
   static delete(id, callback) {
     const sql = `DELETE FROM MenuItems WHERE id = ?`;
+
     db.run(sql, [id], function (err) {
       if (err) {
         callback(err);
       } else {
-        callback(null, { message: 'MenuItem deleted successfully', changes: this.changes });
+        callback(null, { message: 'MenuItem deleted successfully'});
       }
     });
   }

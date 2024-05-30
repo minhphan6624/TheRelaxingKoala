@@ -1,0 +1,49 @@
+<!-- manageReservations.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Reservations</title>
+</head>
+<body>
+    <%- include('./Partials/navbar.ejs') %>
+    <h1>Manage Reservations</h1>
+    <table border="0">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Number of People</th>
+                <th>Requests</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservations.forEach((reservation) => { %>
+                <tr>
+                    <form action="/api/reservation/<%= reservation.id %>?_method=PUT" method="post">
+                        <td><input type="hidden" name="id" value="<%= reservation.id %>"><%= reservation.id %></td>
+                        <td><input type="text" name="name" value="<%= reservation.name %>"></td>
+                        <td><input type="text" name="contact" value="<%= reservation.contact %>"></td>
+                        <td><input type="date" name="date" value="<%= reservation.date %>"></td>
+                        <td><input type="time" name="time" value="<%= reservation.time %>"></td>
+                        <td><input type="number" name="num_people" value="<%= reservation.num_people %>"></td>
+                        <td><input type="text" name="requests" value="<%= reservation.requests %>"></td>
+                        <td>
+                            <button type="submit">Update</button>
+                        </td>
+                    </form>
+                    <td>
+                        <form action="/api/reservation/<%= reservation.id %>?_method=DELETE" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <%- include('./Partials/footer.ejs') %>
+</body>
+</html>

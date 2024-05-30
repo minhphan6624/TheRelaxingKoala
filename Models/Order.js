@@ -10,8 +10,6 @@ class Order {
     this.customer_name = orderData.customer_name;
 
     this.order_date = orderData.order_date || new Date().toISOString();
-    
-    this.total_price = orderData.total_price;
 
     this.status = orderData.status || 'In progress'; // "In progress", "Finished" For KitchenStaff to update
 
@@ -28,19 +26,17 @@ class Order {
 
   //Insert a new order to the DB
   save(callback) {
-        const sql = `INSERT INTO Orders (customer_name, customer_contact, items, total_price, status, order_date, order_type, delivery_address, payment_method, notes) 
-                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        const itemsJSON = JSON.stringify(this.items.map(item => item.toJSON()));
-        const params = [this.customer_name, this.customer_contact, itemsJSON, this.total_price, this.status, this.order_date, this.order_type, this.delivery_address, this.payment_method, this.notes];
+    const sql = `INSERT INTO Orders (customer_name, order_date, status, order_type, table_id, delivery_address) VALUES (?, ?, ?, ?, ?, ?)`;
+    const params = [this.customer_name, this.order_date, this.status, this.order_type, this.table_id, this.delivery_address];
 
-        db.run(sql, params, (err) => {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, { id: this.lastID });
-            }
-        });
-    }
+    db.run(sql, params, function(err) {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, { id: this.lastID });
+      }
+    });
+  }
 
     //Find an order by ID
     static findById(id, callback) {
@@ -49,7 +45,7 @@ class Order {
 
         db.get(sql, [id], (err, row) => {
             
-          if (err) {
+            if (err) {
                 callback(err);
             } else if (!row) {
                 callback(new Error('Order not found'));

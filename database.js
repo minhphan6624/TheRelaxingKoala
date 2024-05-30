@@ -36,7 +36,7 @@ class Database {
           role TEXT
         )`;
 
-    const orderTable = `
+    const createOrderTable = `
             CREATE TABLE IF NOT EXISTS Orders (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 orderDateTime TEXT,

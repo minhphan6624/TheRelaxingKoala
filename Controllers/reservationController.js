@@ -24,7 +24,12 @@ exports.getAllReservations = (req, res) => {
             return res.status(500).json({ error: err });
         }
 
-        return res.status(200).json(reservations);
+        // Check if the request expects JSON or HTML response
+        if (req.headers.accept && req.headers.accept.indexOf('application/json') !== -1) {
+            return res.status(200).json(reservations);
+        } else {
+            return res.render('manageReservations', { reservations });
+        }
         
     })
 }

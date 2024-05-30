@@ -5,6 +5,7 @@ const port = 3000;
 
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const methodOverride = require('method-override');
 const path = require('path');
 
 
@@ -14,6 +15,7 @@ app.set('views', path.join(__dirname, 'Views'));
 
 //Middleware to parse JSON bodies
 app.use(bodyParser.json());
+app.use(methodOverride('_method')); //Method to 
 
 app.use(express.static(path.join(__dirname, 'Public')));
 app.use(express.static(path.join(__dirname, 'Views')));

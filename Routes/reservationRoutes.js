@@ -8,6 +8,7 @@ router.post('/', reservationController.createReservation);//Create a reservation
 
 router.get('/', reservationController.getAllReservations); // Get all reservations
 router.get('/:id', reservationController.getReservationByID); // Get a single reservation by ID
+// router.get('/manage', reservationController.manageReservations);
 
 router.put('/:id', reservationController.updateReservation); // Endpoint to update a reservation
 
