@@ -6,6 +6,8 @@ const paymentController = require('../Controllers/paymentController');
 //Route to create a payment
 router.post('/', paymentController.createPayment);
 
+router.post('/process', paymentController.createPayment);
+
 //Route to get a payment by ID
 router.get('/:id', paymentController.getPaymentByID);
 

@@ -1,4 +1,33 @@
 const Payment = require('../Models/Payment');
+const Order = require('../Models/Order')
+
+// Function to create a payment for an order
+exports.processPayment = (req, res) => {
+
+    const { order_id, amount, method } = req.body;
+    
+    // Retrieve the order to validate the payment amount against the total cost of the order
+    Order.findById(order_id, (err, order) => {
+      if (err || !order) {
+        return res.status(404).json({ error: 'Order not found' });
+      }
+  
+      // Validate payment amount here if necessary
+      const payment = new Payment({
+        order_id,
+        amount,
+        method,
+        date: new Date().toISOString()
+      });
+  
+      payment.save((err, savedPayment) => {
+        if (err) {
+          return res.status(500).json({ error: err.message });
+        }
+        res.status(201).json(savedPayment);
+      });
+    });
+};
 
 //Create a new Payment
 exports.createPayment = (req, res) => {
@@ -31,3 +60,5 @@ exports.getPaymentByID = (req, res) => {
     res.status(200).json(payment);
   });
 };
+
+
