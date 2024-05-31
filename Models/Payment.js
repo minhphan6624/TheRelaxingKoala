@@ -13,7 +13,7 @@ class Payment {
   save(callback) {
     const sql = `INSERT INTO Payments (order_id, amount, method, date) VALUES (?, ?, ?, ?)`;
     
-    const params = [this.amount, this.method, this.date];
+    const params = [this.order_id, this.amount, this.method, this.date];
 
     db.run(sql, params, function(err) {
       if (err) {

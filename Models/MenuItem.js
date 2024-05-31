@@ -12,9 +12,10 @@ class MenuItem {
   //Insert a new menuItem
   save(callback) {
     const sql = `INSERT INTO MenuItems (name, description, price, category) VALUES (?, ?, ?, ?)`;
+    
     const params = [this.name, this.description, this.price, this.category];
 
-    db.run(sql, params, function(err) {
+    db.run(sql, params, (err) => {
       if (err) {
         callback(err);
       } else {
@@ -74,7 +75,7 @@ class MenuItem {
   static delete(id, callback) {
     const sql = `DELETE FROM MenuItems WHERE id = ?`;
 
-    db.run(sql, [id], function (err) {
+    db.run(sql, [id], (err) => {
       if (err) {
         callback(err);
       } else {

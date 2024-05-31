@@ -26,6 +26,7 @@ const reservationRoutes = require('./Routes/reservationRoutes');
 // const userRoutes = require('./Routes/userRoutes');
 const orderRoutes = require('./Routes/orderRoutes');
 const menuRoutes = require('./Routes/menuRoutes');
+const paymentRoutes = require('./Routes/paymentRoutes');
 
 //Use routes
 app.use('/', indexRoutes);

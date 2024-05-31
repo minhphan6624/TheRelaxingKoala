@@ -32,7 +32,7 @@ class OrderItem {
     this.notes = details.notes || this.notes;
 
     const sql = `UPDATE OrderItems SET quantity = ?, price = ?, notes = ? WHERE id = ?`;
-    
+
     const params = [this.quantity, this.price, this.notes, this.id];
 
     db.run(sql, params, (err) => {
@@ -54,6 +54,7 @@ class OrderItem {
       } else {
         callback(null, rows.map(row => new OrderItem(row)));
       }
+   
     });
   }
 
@@ -68,7 +69,7 @@ class OrderItem {
       }
     });
   }
-
+ //nothing special
   //Delete all orderItems based in an order's ID
   static deleteByOrderId(order_id, callback) {
     const sql = `DELETE FROM OrderItems WHERE order_id = ?`;
