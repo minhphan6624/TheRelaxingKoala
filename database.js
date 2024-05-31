@@ -85,10 +85,31 @@ class Database {
     //       role TEXT
     //     )`;
 
+
+    const createDefaultMenuItems = `
+    INSERT INTO MenuItems (name, description, price, category) VALUES
+      ('Prawn Cocktail', 'Fresh prawns served with a tangy cocktail sauce', 12, 'Entrees'),
+      ('Garlic Bread', 'Grilled bread with garlic butter and herbs', 5, 'Entrees'),
+      ('Beef Lasagna', 'Layered pasta with rich beef sauce, topped with béchamel and cheese', 18, 'Mains'),
+      ('Chicken Parmigiana', 'Breaded chicken breast, marinara sauce, and melted mozzarella cheese', 17, 'Mains'),
+      ('Fatto Tiramisu', 'Coffee liqueur-soaked sponge, mascarpone, chocolate', 7, 'Desserts'),
+      ('Scugnizzielli Nutella & Gelato', 'Fried mini pizza doughnuts, Nutella, vanilla gelato', 7.5, 'Desserts'),
+      ('Affogato', 'Vanilla gelato, espresso', 6, 'Desserts'),
+      ('Affogato Limoncello (vg)', 'Lemon sorbet, limoncello', 7.5, 'Desserts'),
+      ('Limoncello 35ml', 'Limoncello 35ml', 4, 'Drinks'),
+      ('Espresso', 'Espresso', 2.5, 'Drinks'),
+      ('Macchiato', 'Macchiato', 2.5, 'Drinks'),
+      ('Amaro del Capo 35ml', 'Amaro del Capo 35ml', 4, 'Drinks');
+    `
     this.db.run(createReservationTable);
+    
     this.db.run(createOrderTable);
+
     this.db.run(createOrderItemTable);
+
     this.db.run(createMenuItemTable);
+    this.db.run(createDefaultMenuItems);
+
     this.db.run(createTableTable);
   }
 

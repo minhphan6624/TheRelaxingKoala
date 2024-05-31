@@ -13,9 +13,9 @@ class Order {
 
     this.order_type = orderData.order_type; // "Eat-in", "Takeaway", "Delivery"
 
-    this.table_id = orderData.order_type === 'Dine-in' ? orderData.table_id : null;
+    this.table_id = orderData.order_type.toLowerCase() === 'dine-in' ? orderData.table_id : null;
     
-    this.delivery_address = orderData.order_type === 'Delivery' ? orderData.delivery_address : null;
+    this.delivery_address = orderData.order_type.toLowerCase() === 'delivery' ? orderData.delivery_address : null;
     // this.customer_contact = orderData.customer_contact;
 
   }
@@ -26,7 +26,7 @@ class Order {
 
     const params = [this.customer_name, this.order_date, this.status, this.order_type, this.table_id, this.delivery_address];
 
-    db.run(sql, params, function(err) {
+    db.run(sql, params, (err) => {
       if (err) {
         callback(err);
       } else {
@@ -101,11 +101,11 @@ class Order {
           else {
             // Then, delete the Order
             const sql = `DELETE FROM Orders WHERE id = ?`;
-            db.run(sql, [id], function(err) {
+            db.run(sql, [id], (err) => {
               if (err) {
                 callback(err);
               } else {
-                callback(null, { message: 'Order and associated items deleted successfully', changes: this.changes });
+                callback(null, { message: 'Order and associated items deleted successfully'});
               }
             });
           }
@@ -115,7 +115,7 @@ class Order {
     //Find an order based on ID along with all the associated OrderItems
     static findWithItems(id, callback) {
 
-        const sql = `SELECT o.*, oi.id AS item_id, oi.menu_item_id, oi.quantity, oi.price, oi.special_instructions
+        const sql = `SELECT o.*, oi.id AS item_id, oi.menu_item_id, oi.quantity, oi.price, oi.notes
                         FROM Orders o
                         LEFT JOIN OrderItems oi ON o.id = oi.order_id
                         WHERE o.id = ?`;

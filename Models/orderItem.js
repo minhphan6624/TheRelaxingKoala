@@ -1,4 +1,4 @@
-const db = require('../config/database');
+const db = require('../database');
 
 class OrderItem {
   constructor(orderItemData) {
@@ -10,18 +10,36 @@ class OrderItem {
     this.notes = orderItemData.notes;
   }
 
-
   //Insert a new OrderItem
   save(callback) {
     const sql = `INSERT INTO OrderItems (order_id, menu_item_id, quantity, price, notes) VALUES (?, ?, ?, ?, ?)`;
     
     const params = [this.order_id, this.menu_item_id, this.quantity, this.price, this.notes];
 
-    db.run(sql, params, function(err) {
+    db.run(sql, params, (err) => {
       if (err) {
         callback(err);
       } else {
         callback(null, { id: this.lastID });
+      }
+    });
+  }
+
+  //Update an OrderItem
+  update(details, callback) {
+    this.quantity = details.quantity || this.quantity;
+    this.price = details.price || this.price;
+    this.notes = details.notes || this.notes;
+
+    const sql = `UPDATE OrderItems SET quantity = ?, price = ?, notes = ? WHERE id = ?`;
+    
+    const params = [this.quantity, this.price, this.notes, this.id];
+
+    db.run(sql, params, (err) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null);
       }
     });
   }
@@ -38,6 +56,31 @@ class OrderItem {
       }
     });
   }
+
+  //Delete an orderItem based on its ID
+  static delete(id, callback) {
+    const sql = `DELETE FROM OrderItems WHERE id = ?`;
+    db.run(sql, [id], (err) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, { message: 'Order item deleted successfully'});
+      }
+    });
+  }
+
+  //Delete all orderItems based in an order's ID
+  static deleteByOrderId(order_id, callback) {
+    const sql = `DELETE FROM OrderItems WHERE order_id = ?`;
+    db.run(sql, [order_id], (err) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, { message: 'Order items deleted successfully'});
+      }
+    });
+  }
+
 }
 
 module.exports = OrderItem;

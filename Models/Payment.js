@@ -3,7 +3,7 @@ const db = require('../database');
 class Payment {
   constructor(paymentData) {
     this.id = paymentData.id;
-    this.orderID = paymentData.orderID;
+    this.order_id = paymentData.order_id;
     this.amount = paymentData.amount;
     this.method = paymentData.method;
     this.date = paymentData.date || new Date().toISOString();
@@ -11,7 +11,7 @@ class Payment {
 
   //Insert a new payment to the DB
   save(callback) {
-    const sql = `INSERT INTO Payments (amount, method, date) VALUES (?, ?, ?, ?)`;
+    const sql = `INSERT INTO Payments (order_id, amount, method, date) VALUES (?, ?, ?, ?)`;
     
     const params = [this.amount, this.method, this.date];
 
@@ -27,6 +27,20 @@ class Payment {
   //Find a payment by ID
   static findById(id, callback) {
     const sql = `SELECT * FROM Payments WHERE id = ?`;
+    db.get(sql, [id], (err, row) => {
+      if (err) {
+        callback(err);
+      } else if (!row) {
+        callback(new Error('Payment not found'));
+      } else {
+        callback(null, new Payment(row));
+      }
+    });
+  }
+
+  //Find a payment by orderID
+  static findById(id, callback) {
+    const sql = `SELECT * FROM Payments WHERE order_id = ?`;
     db.get(sql, [id], (err, row) => {
       if (err) {
         callback(err);
