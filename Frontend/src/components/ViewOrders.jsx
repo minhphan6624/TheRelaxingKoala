@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './ViewOrders.css';
+import './styles/ViewOrders.css';
 
 const ViewOrders = () => {
     const [orders, setOrders] = useState([]);
