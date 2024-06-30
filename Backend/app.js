@@ -11,13 +11,14 @@ app.use(cors());
 const { connectDB } = require('./db');
 connectDB();
 
-
 //Import routes
 const reservationRoutes = require('./routes/reservationsRoutes');
 const orderRoutes = require('./routes/ordersRoutes');
+const menuItemRoutes = require('./routes/menuItemRoutes');
 
 app.use('/api/reservations', reservationRoutes) // Reservation routes
 app.use('/api/orders', orderRoutes) // Order routes
+app.use('/api/menuItems', menuItemRoutes) // Menu item routes
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
