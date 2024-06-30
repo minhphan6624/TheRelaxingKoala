@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "./styles//Orders.css";
 
 const Orders = () => {
     const [orders, setOrders] = useState([]);
-    const [form, setForm] = useState({
+    const [newOrder, setNewOrder] = useState({
         item: '',
-        quantity: '',
-        price: ''
+        quantity: 0,
+        price: 0,
     });
 
     useEffect(() => {
@@ -16,7 +15,7 @@ const Orders = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/orders'); // Updated URL
+            const response = await axios.get('http://localhost:3000/api/orders');
             setOrders(response.data);
         } catch (error) {
             console.error('Error fetching orders', error);
@@ -25,21 +24,18 @@ const Orders = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setForm({
-            ...form,
-            [name]: value
-        });
+        setNewOrder({ ...newOrder, [name]: value });
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/api/orders', form); // Updated URL
-            setOrders([...orders, response.data]);
-            setForm({
+            await axios.post('http://localhost:3000/api/orders', newOrder);
+            fetchOrders();
+            setNewOrder({
                 item: '',
-                quantity: '',
-                price: ''
+                quantity: 0,
+                price: 0,
             });
         } catch (error) {
             console.error('Error creating order', error);
@@ -49,40 +45,38 @@ const Orders = () => {
     return (
         <div>
             <h1>Orders</h1>
+            <ul>
+                {orders.map((order) => (
+                    <li key={order.id}>
+                        {order.item} - {order.quantity} @ ${order.price}
+                    </li>
+                ))}
+            </ul>
+            <h2>Create a new order</h2>
             <form onSubmit={handleFormSubmit}>
                 <input
                     type="text"
                     name="item"
-                    value={form.item}
-                    onChange={handleInputChange}
                     placeholder="Item"
-                    required
+                    value={newOrder.item}
+                    onChange={handleInputChange}
                 />
                 <input
                     type="number"
                     name="quantity"
-                    value={form.quantity}
-                    onChange={handleInputChange}
                     placeholder="Quantity"
-                    required
+                    value={newOrder.quantity}
+                    onChange={handleInputChange}
                 />
                 <input
                     type="number"
                     name="price"
-                    value={form.price}
-                    onChange={handleInputChange}
                     placeholder="Price"
-                    required
+                    value={newOrder.price}
+                    onChange={handleInputChange}
                 />
                 <button type="submit">Create Order</button>
             </form>
-            <ul>
-                {orders.map((order) => (
-                    <li key={order.id}>
-                        {order.item} - {order.quantity} x ${order.price} - {order.status}
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 };

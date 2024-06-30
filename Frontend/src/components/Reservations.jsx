@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './styles/Reservations.css';
 
 const Reservations = () => {
     const [reservations, setReservations] = useState([]);
-    const [form, setForm] = useState({
+    const [newReservation, setNewReservation] = useState({
         name: '',
         contact: '',
         date: '',
         time: '',
-        numberOfPeople: ''
+        guestNum: 0,
     });
 
     useEffect(() => {
@@ -18,7 +17,7 @@ const Reservations = () => {
 
     const fetchReservations = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/reservations'); // Updated URL
+            const response = await axios.get('http://localhost:3000/api/reservations');
             setReservations(response.data);
         } catch (error) {
             console.error('Error fetching reservations', error);
@@ -27,23 +26,20 @@ const Reservations = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setForm({
-            ...form,
-            [name]: value
-        });
+        setNewReservation({ ...newReservation, [name]: value });
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/api/reservations', form); // Updated URL
-            setReservations([...reservations, response.data]);
-            setForm({
+            await axios.post('http://localhost:3000/api/reservations', newReservation);
+            fetchReservations();
+            setNewReservation({
                 name: '',
                 contact: '',
                 date: '',
                 time: '',
-                numberOfPeople: ''
+                guestNum: 0,
             });
         } catch (error) {
             console.error('Error creating reservation', error);
@@ -53,54 +49,50 @@ const Reservations = () => {
     return (
         <div>
             <h1>Reservations</h1>
+            <ul>
+                {reservations.map((reservation) => (
+                    <li key={reservation.id}>
+                        {reservation.name} - {reservation.date} at {reservation.time} for {reservation.guestNum} guests
+                    </li>
+                ))}
+            </ul>
+            <h2>Create a new reservation</h2>
             <form onSubmit={handleFormSubmit}>
                 <input
                     type="text"
                     name="name"
-                    value={form.name}
-                    onChange={handleInputChange}
                     placeholder="Name"
-                    required
+                    value={newReservation.name}
+                    onChange={handleInputChange}
                 />
                 <input
                     type="text"
                     name="contact"
-                    value={form.contact}
-                    onChange={handleInputChange}
                     placeholder="Contact"
-                    required
+                    value={newReservation.contact}
+                    onChange={handleInputChange}
                 />
                 <input
                     type="date"
                     name="date"
-                    value={form.date}
+                    value={newReservation.date}
                     onChange={handleInputChange}
-                    required
                 />
                 <input
                     type="time"
                     name="time"
-                    value={form.time}
+                    value={newReservation.time}
                     onChange={handleInputChange}
-                    required
                 />
                 <input
                     type="number"
-                    name="numberOfPeople"
-                    value={form.numberOfPeople}
+                    name="guestNum"
+                    placeholder="Number of Guests"
+                    value={newReservation.guestNum}
                     onChange={handleInputChange}
-                    placeholder="Number of People"
-                    required
                 />
                 <button type="submit">Create Reservation</button>
             </form>
-            <ul>
-                {reservations.map((reservation) => (
-                    <li key={reservation.id}>
-                        {reservation.name} - {reservation.date} {reservation.time} - {reservation.numberOfPeople} people
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 };
