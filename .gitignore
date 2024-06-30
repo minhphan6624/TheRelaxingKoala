@@ -1,1 +1,15 @@
+# Node modules
 node_modules/
+
+# Vite cache
+.vite/
+
+# Local environment variables
+.env.local
+.env.*.local
+
+# MacOS files
+.DS_Store
+
+# VSCode files
+.vscode/
