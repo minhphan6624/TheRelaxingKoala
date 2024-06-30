@@ -1,7 +1,5 @@
-const {Sequelize, DataTypes} = require('sequelize');
-
-const {sequelize} = require('../db');
-const { name } = require('ejs');
+const { Sequelize, DataTypes } = require('sequelize');
+const { sequelize } = require('../db');
 
 const MenuItem = sequelize.define('MenuItem', {
     name: { type: DataTypes.STRING, allowNull: false },

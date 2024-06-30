@@ -2,10 +2,13 @@ const { Sequelize, DataTypes } = require('sequelize');
 const { sequelize } = require('../db');
 
 const Order = sequelize.define('Order', {
-    item: { type: DataTypes.STRING, allowNull: false },
-    quantity: { type: DataTypes.INTEGER, allowNull: false },
-    price: { type: DataTypes.FLOAT, allowNull: false },
-    status: { type: DataTypes.STRING, defaultValue: 'received' },
+    customerName: { type: DataTypes.STRING, allowNull: false },
+    customerContact: { type: DataTypes.STRING, allowNull: false },
+    status: { 
+        type: DataTypes.ENUM('pending', 'preparing', 'ready', 'completed', 'cancelled'), 
+        allowNull: false, 
+        defaultValue: 'pending' 
+    },
 }, {
     timestamps: true
 });
