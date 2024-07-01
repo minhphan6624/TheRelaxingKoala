@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Reservation = () => {
+const CreateReservation = () => {
     const [reservation, setReservation] = useState({
         name: '',
-        contact : '',
+        contact: '',
         date: '',
         time: '',
         guestNum: ''
@@ -51,4 +51,4 @@ const Reservation = () => {
     );
 };
 
-export default Reservation;
+export default CreateReservation;

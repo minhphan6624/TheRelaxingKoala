@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Order = () => {
+const CreateOrder = () => {
     const [order, setOrder] = useState({
         customerName: '',
         customerContact: '',
@@ -118,4 +118,4 @@ const Order = () => {
     );
 };
 
-export default Order;
+export default CreateOrder;

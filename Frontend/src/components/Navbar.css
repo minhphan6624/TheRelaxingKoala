@@ -1,0 +1,42 @@
+/* General styling for the navbar container */
+.navbar-container {
+  background-color: #dcdfbc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 2rem;
+  padding: 0, 1rem;
+}
+
+.navbar-container h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Styling for the navigation menu */
+.navbar-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.navbar-container ul li {
+  display: inline;
+}
+
+.navbar-container ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar-container ul li a:hover {
+  color: #fff;
+  background-color: #777;
+
+}

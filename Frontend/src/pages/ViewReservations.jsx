@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Reservations = () => {
+const CreateReservation = () => {
     // Initialize state to hold fetched reservations
     const [reservations, setReservations] = useState([]);
 
@@ -35,4 +35,4 @@ const Reservations = () => {
     );
 };
 
-export default Reservations;
+export default CreateReservation;
