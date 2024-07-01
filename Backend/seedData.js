@@ -18,10 +18,16 @@ const menuItems = [
 const seedMenuItems = async () => {
     try {
         console.log('Seeding menu items...');
-        await MenuItem.bulkCreate(menuItems, {
-            ignoreDuplicates: true // Avoid inserting duplicates if the server restarts
-        });
-        console.log('Menu items seeded successfully');
+        const existingMenuItems = await MenuItem.findAll();
+        
+        if (existingMenuItems.length === 0) {
+            await MenuItem.bulkCreate(menuItems, {
+                ignoreDuplicates: true // Avoid inserting duplicates if the server restarts
+            });
+            console.log('Menu items seeded successfully');
+        } else {
+            console.log('Menu items already exist, skipping seeding');
+        }
     } catch (error) {
         console.error('Error seeding menu items:', error);
     }

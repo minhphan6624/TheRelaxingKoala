@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import NavBar from './components/Navbar';
+import Footer from './components/Footer';
 import CreateOrder from './pages/CreateOrder';
 import ViewOrders from './pages/ViewOrders';
 import ViewReservations from './pages/ViewReservations';
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/create-reservation" element={<CreateReservation />} />
                 <Route path="/menu" element={<Menu />} />
             </Routes>
+            <Footer />
         </>
     );
 }

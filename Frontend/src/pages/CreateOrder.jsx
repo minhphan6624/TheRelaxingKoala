@@ -73,7 +73,8 @@ const CreateOrder = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+       <div classname="order-form-container">
+         <form onSubmit={handleSubmit}>
             <div>
                 <label>Customer Name:</label>
                 <input type="text" name="customerName" value={order.customerName} onChange={handleChange} />
@@ -98,6 +99,7 @@ const CreateOrder = () => {
                         value={item.quantity}
                         onChange={(e) => handleItemChange(e, index)}
                     />
+                    {/* Display add Item and Remove Item buttons */}
                     {index === itemFields.length - 1 && (
                         <button type="button" onClick={addItemField}>Add Item</button>
                     )}
@@ -108,6 +110,7 @@ const CreateOrder = () => {
             ))}
             <button type="submit">Create Order</button>
         </form>
+       </div>
     );
 };
 
