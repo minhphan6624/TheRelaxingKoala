@@ -7,7 +7,7 @@ import CreateOrder from './pages/CreateOrder';
 import ViewOrders from './pages/ViewOrders';
 import ViewReservations from './pages/ViewReservations';
 import CreateReservation from './pages/CreateReservation'
-
+import Menu from './pages/Menu';
 import './App.css';
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
                 <Route path="/view-orders" element={<ViewOrders />} />
                 <Route path="/view-reservations" element={<ViewReservations />} />
                 <Route path="/create-reservation" element={<CreateReservation />} />
+                <Route path="/menu" element={<Menu />} />
             </Routes>
         </>
     );
