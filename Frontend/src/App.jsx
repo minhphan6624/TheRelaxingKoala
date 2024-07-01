@@ -1,20 +1,28 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import NavBar from './components/Navbar';
+import Orders from './components/Orders';
+import ViewOrders from './components/ViewOrders';
+import ViewReservations from './components/ViewReservations';
+import Reservations from './components/Reservations'
+
 import './App.css';
 
 function App() {
     return (
-        <div className="container">
-            <h1>Welcome to Relaxing Koala</h1>
-            <nav>
-                <ul>
-                    <li><Link to="/reservations">Create Reservation</Link></li>
-                    <li><Link to="/view-reservations">View Reservations</Link></li>
-                    <li><Link to="/orders">Create Order</Link></li>
-                    <li><Link to="/view-orders">View Orders</Link></li>
-                </ul>
-            </nav>
-        </div>
+        <Router>
+            <div>
+                <NavBar />
+                <Routes>
+                    <Route path="/orders" component={Orders} />
+                    <Route path="/view-order" component={ViewOrders} />
+                    <Route path="/reservations" component={Reservations} />
+                    <Route path="/view-reservation" component={ViewReservations} />
+                </Routes>
+            </div>
+        </Router>
     );
 }
 

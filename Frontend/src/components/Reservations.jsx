@@ -1,100 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-const Reservations = () => {
-    const [reservations, setReservations] = useState([]);
-    const [newReservation, setNewReservation] = useState({
+const Reservation = () => {
+    const [reservation, setReservation] = useState({
         name: '',
-        contact: '',
+        contact : '',
         date: '',
         time: '',
-        guestNum: 0,
+        guestNum: ''
     });
 
-    useEffect(() => {
-        fetchReservations();
-    }, []);
-
-    const fetchReservations = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/api/reservations');
-            setReservations(response.data);
-        } catch (error) {
-            console.error('Error fetching reservations', error);
-        }
-    };
-
-    const handleInputChange = (e) => {
+    // Handle form input changes
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        setNewReservation({ ...newReservation, [name]: value });
+        setReservation({ ...reservation, [name]: value });
     };
 
-    const handleFormSubmit = async (e) => {
+    // Handle form submission
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3000/api/reservations', newReservation);
-            fetchReservations();
-            setNewReservation({
-                name: '',
-                contact: '',
-                date: '',
-                time: '',
-                guestNum: 0,
-            });
+            await axios.post('http://localhost:3000/api/reservations', reservation);
+            alert('Reservation created successfully!');
         } catch (error) {
-            console.error('Error creating reservation', error);
+            console.error('Error creating reservation:', error);
         }
     };
 
+    // Render reservation form
     return (
-        <div>
-            <h1>Reservations</h1>
-            <ul>
-                {reservations.map((reservation) => (
-                    <li key={reservation.id}>
-                        {reservation.name} - {reservation.date} at {reservation.time} for {reservation.guestNum} guests
-                    </li>
-                ))}
-            </ul>
-            <h2>Create a new reservation</h2>
-            <form onSubmit={handleFormSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={newReservation.name}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="text"
-                    name="contact"
-                    placeholder="Contact"
-                    value={newReservation.contact}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="date"
-                    name="date"
-                    value={newReservation.date}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="time"
-                    name="time"
-                    value={newReservation.time}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="number"
-                    name="guestNum"
-                    placeholder="Number of Guests"
-                    value={newReservation.guestNum}
-                    onChange={handleInputChange}
-                />
-                <button type="submit">Create Reservation</button>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label>Customer Name:</label>
+                <input type="text" name="name" value={reservation.name} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Date:</label>
+                <input type="date" name="date" value={reservation.date} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Time:</label>
+                <input type="time" name="time" value={reservation.time} onChange={handleChange} />
+            </div>
+            <div>
+                <label>Number of Guests:</label>
+                <input type="number" name="guestNum" value={reservation.guestNum} onChange={handleChange} />
+            </div>
+            <button type="submit">Create Reservation</button>
+        </form>
     );
 };
 
-export default Reservations;
+export default Reservation;

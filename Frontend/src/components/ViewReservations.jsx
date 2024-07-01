@@ -1,43 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './styles/ViewReservations.css';
 
-const ViewReservations = () => {
+const Reservations = () => {
+    // Initialize state to hold fetched reservations
     const [reservations, setReservations] = useState([]);
 
+    // Fetch reservations from the backend
+    const fetchReservations = async () => {
+        try {
+            const response = await axios.get('http://localhost:3000/api/reservations');
+            setReservations(response.data); // Set fetched reservations in state
+        } catch (error) {
+            console.error('Error fetching reservations:', error);
+        }
+    };
+
+    // Fetch reservations on component mount
     useEffect(() => {
         fetchReservations();
     }, []);
 
-    const fetchReservations = async () => {
-        try {
-            const response = await axios.get('http://localhost:3000/api/reservations');
-
-            //Transform the guestNum property to a number
-            const updatedReservations = response.data.map(reservation => ({
-                ...reservation,
-                guestNum: parseInt(reservation.guestNum, 10) // Ensure guestNum is a number
-            }));
-
-            setReservations(updatedReservations);
-
-        } catch (error) {
-            console.error('Error fetching reservations', error);
-        }
-    }
-
     return (
-        <div className="container">
+        <div>
             <h1>Reservations</h1>
-            <ul>
-                {reservations.map((reservation) => (
-                    <li key={reservation.id}>
-                        {reservation.name} - {reservation.date} {reservation.time} - {reservation.guestNum} people
-                    </li>
-                ))}
-            </ul>
+            {reservations.map((reservation) => (
+                <div key={reservation.id} className="reservation-container">
+                    <p>Customer Name: {reservation.name}</p>
+                    <p>Date: {reservation.date}</p>
+                    <p>Time: {reservation.time}</p>
+                    <p>Number of Guests: {reservation.guestNum}</p>
+                </div>
+            ))}
         </div>
     );
 };
 
-export default ViewReservations;
+export default Reservations;
