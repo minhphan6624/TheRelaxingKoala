@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+import './styles/ViewReservations.css';
+
 const CreateReservation = () => {
     // Initialize state to hold fetched reservations
     const [reservations, setReservations] = useState([]);
@@ -21,17 +23,19 @@ const CreateReservation = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <h1>Reservations</h1>
-            {reservations.map((reservation) => (
-                <div key={reservation.id} className="reservation-container">
-                    <p>Customer Name: {reservation.name}</p>
-                    <p>Date: {reservation.date}</p>
-                    <p>Time: {reservation.time}</p>
-                    <p>Number of Guests: {reservation.guestNum}</p>
-                </div>
-            ))}
-        </div>
+            <div className='reservation-container'>
+                {reservations.map((reservation) => (
+                    <div key={reservation.id} className="reservation-card">
+                        <p>Customer Name: {reservation.name}</p>
+                        <p>Date: {reservation.date}</p>
+                        <p>Time: {reservation.time}</p>
+                        <p>Number of Guests: {reservation.guestNum}</p>
+                    </div>
+                ))}
+            </div>
+        </>
     );
 };
 

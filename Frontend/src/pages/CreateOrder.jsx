@@ -34,13 +34,6 @@ const CreateOrder = () => {
         const { name, value } = e.target;
         setOrder({ ...order, [name]: value });
     };
-
-    // // Handle item input changes
-    // const handleItemChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setCurrentItem({ ...currentItem, [name]: value });
-    // };
-
     // Add item to order
     const addItem = () => {
         setOrder({ ...order, items: [...order.items, currentItem] });

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import './styles/CreateReservation.css';
+
 const CreateReservation = () => {
     const [reservation, setReservation] = useState({
         name: '',
@@ -16,7 +18,7 @@ const CreateReservation = () => {
         setReservation({ ...reservation, [name]: value });
     };
 
-    // Handle form submission
+    // Make a post request upon form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -29,25 +31,31 @@ const CreateReservation = () => {
 
     // Render reservation form
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Customer Name:</label>
-                <input type="text" name="name" value={reservation.name} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Date:</label>
-                <input type="date" name="date" value={reservation.date} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Time:</label>
-                <input type="time" name="time" value={reservation.time} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Number of Guests:</label>
-                <input type="number" name="guestNum" value={reservation.guestNum} onChange={handleChange} />
-            </div>
-            <button type="submit">Create Reservation</button>
-        </form>
+        <div className='reservation-form-container'>
+            <form onSubmit={handleSubmit}>
+                <div className='form-group'>
+                    <label>Customer Name:</label>
+                    <input type="text" name="name" value={reservation.name} onChange={handleChange} />
+                </div>
+                <div className='form-group'>
+                    <label>Contact details:</label>
+                    <input type="text" name="contact" value={reservation.contact} onChange={handleChange} />
+                </div>
+                <div className='form-group'>
+                    <label>Date:</label>
+                    <input type="date" name="date" value={reservation.date} onChange={handleChange} />
+                </div>
+                <div className='form-group'>
+                    <label>Time:</label>
+                    <input type="time" name="time" value={reservation.time} onChange={handleChange} />
+                </div>
+                <div className='form-group'>
+                    <label>Number of Guests:</label>
+                    <input type="number" name="guestNum" value={reservation.guestNum} onChange={handleChange} />
+                </div>
+                <button type="submit">Create Reservation</button>
+            </form>
+        </div>
     );
 };
 
