@@ -1,117 +1,112 @@
-import React, { useState, useEffect } from 'react';
+
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const CreateOrder = () => {
-    const [order, setOrder] = useState({
-        customerName: '',
-        customerContact: '',
-        status: 'pending',
-        items: []
-    });
+import './styles/CreateOrder.css';
 
-    // Initialize state to hold fetched menu items
+const CreateOrder = () => {
+
     const [menuItems, setMenuItems] = useState([]);
 
-    // Initialize state to hold the current item being added to the order
-    const [currentItem, setCurrentItem] = useState({ menuItemId: '', quantity: '' });
+    const [customerDetails, setCustomerDetails] = useState({
+        customerName: '',
+        customerContact: '',
+        status: ''
+    });    
 
-    // Fetch menu items from the backend
+    const [selectedItems, setSelectedItems] = useState({ id: '', quantity: 1 });
+
+    //Fetch all menu items from the server
     useEffect(() => {
         const fetchMenuItems = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/menuitems');
+            try 
+            {
+                const response = await axios.get('http://localhost:3000/api/menuItems');
                 setMenuItems(response.data);
-            } catch (error) {
+            }
+            catch (error)
+            {
                 console.error('Error fetching menu items:', error);
             }
-        };
+        }
 
         fetchMenuItems();
-    }, []);
+    });
 
-    // Handle form input changes
+    //Handle form input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setOrder({ ...order, [name]: value });
-    };
-    // Add item to order
-    const addItem = () => {
-        setOrder({ ...order, items: [...order.items, currentItem] });
-        setCurrentItem({ menuItemId: '', quantity: '' });
+        setCustomerDetails({ ...customerDetails, [name]: value });
+    }
+
+    const handleMenuItemChange = (e) => {
+        const { name, value } = e.target;
+        
+        setSelectedItems({...selectedItems, [name]: value});
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.prevenDefault();
+        //Create a new order object
+        const menuItem = menuItems.find((item) => item.id === selectedItems.id);
+
+        const order = {
+            customerName: customerDetails.customerName,
+            customerContact: customerDetails.customerContact,
+            status: customerDetails.status,
+            menuItems: [menuItem]
+        };
+
         try {
-            await axios.post('/api/orders', order);
+            const response = await axios.post('http://localhost:3000/api/orders', order);
             alert('Order created successfully!');
+            setCustomerDetails({ customerName: '', customerContact: '', status: 'pending' });
+            setSelectedItems({ id: '', quantity: 1 });
         } catch (error) {
             console.error('Error creating order:', error);
         }
-    };
-
-    const [itemFields, setItemFields] = useState([{ menuItemId: '', quantity: '' }]);
-
-    // Add item field
-    const addItemField = () => {
-        setItemFields([...itemFields, { menuItemId: '', quantity: '' }]);
-    };
-
-    // Handle item input changes
-    const handleItemChange = (e, index) => {
-        const { name, value } = e.target;
-        const updatedFields = [...itemFields];
-        updatedFields[index][name] = value;
-        setItemFields(updatedFields);
-    };
-
-    // Remove item field
-    const removeItemField = (index) => {
-        const updatedFields = [...itemFields];
-        updatedFields.splice(index, 1);
-        setItemFields(updatedFields);
-    };
+    }
 
     return (
-       <div classname="order-form-container">
-         <form onSubmit={handleSubmit}>
-            <div>
-                <label>Customer Name:</label>
-                <input type="text" name="customerName" value={order.customerName} onChange={handleChange} />
-            </div>
-            <div>
-                <label>Customer Contact:</label>
-                <input type="text" name="customerContact" value={order.customerContact} onChange={handleChange} />
-            </div>
-            {itemFields.map((item, index) => (
-                <div key={index}>
-                    <label>Menu Item:</label>
-                    <select name="menuItemId" value={item.menuItemId} onChange={(e) => handleItemChange(e, index)}>
-                        <option value="">Select an item</option>
-                        {menuItems.map((menuItem) => (
-                            <option key={menuItem.id} value={menuItem.id}>{menuItem.name}</option>
+        <div className='order-form-container'>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Customer Name:</label>
+                    <input type="text" name="customerName" value={customerDetails.customerName} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label>Contact:</label>
+                    <input type="text" name="customerContact" value={customerDetails.customerContact} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label>Status:</label>
+                    <input type="text" name="status" value={customerDetails.status} onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label>Menu Items:</label>
+                    <select name="menuItems" value={selectedItems} onChange={handleMenuItemChange}>
+                        {menuItems.map((item) => (
+                            <option key={item.id} value={item.id}>{item.name}</option>
                         ))}
                     </select>
+                </div>
+                <div className="form-group">
+                    <label>Quantity:</label>
                     <input
                         type="number"
                         name="quantity"
-                        placeholder="Quantity"
-                        value={item.quantity}
-                        onChange={(e) => handleItemChange(e, index)}
+                        value={selectedItems.quantity}
+                        onChange={handleMenuItemChange}
+                        min="1"
+                        required
                     />
-                    {/* Display add Item and Remove Item buttons */}
-                    {index === itemFields.length - 1 && (
-                        <button type="button" onClick={addItemField}>Add Item</button>
-                    )}
-                    {index !== 0 && (
-                        <button type="button" onClick={() => removeItemField(index)}>Remove Item</button>
-                    )}
                 </div>
-            ))}
-            <button type="submit">Create Order</button>
-        </form>
-       </div>
+                
+                <button type="submit">Create Order</button>
+            </form>
+
+        </div>
     );
-};
+}
 
 export default CreateOrder;

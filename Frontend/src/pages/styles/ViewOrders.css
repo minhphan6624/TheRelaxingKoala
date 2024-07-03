@@ -1,6 +1,16 @@
-.orders-container {
+.view-order-page {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.orders-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    gap: 1rem;
     align-items: center;
     justify-content: center;
     margin-top: 20px;
@@ -11,9 +21,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    
+    width: 300px;
     margin-bottom: 20px;
     padding: 20px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }

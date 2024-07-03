@@ -1,19 +1,12 @@
-.menu-container {
+.menu-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-top: 20px;
 }
 
-.menu-card {
+.menu-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    width: 80%;
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #000;
-    border-radius: 10px;
+    gap: 1rem;
 }

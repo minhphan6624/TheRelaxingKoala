@@ -1,0 +1,29 @@
+.menu-item-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item-card h2 {
+    margin: 0 0 0.5rem;
+}
+
+.menu-item-card p {
+    margin: 0.5rem 0;
+}
+
+.menu-item-card button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menu-item-card button:hover {
+    background-color: #45a049;
+}

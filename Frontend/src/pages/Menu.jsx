@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import MenuItem from '../components/MenuItem';
+
 import './styles/Menu.css';
 
 const Menu = () => {
 
     const [menuItems, setMenuItems] = useState([]);
+    const [order, setOrder] = useState([]);
 
+    //Fetch menu items from the server
     const fetchMenuItems = async () => {
         try {
             const response = await axios.get('http://localhost:3000/api/menuItems');
@@ -17,22 +21,26 @@ const Menu = () => {
         }
     }
 
+    //Add a menu item to the order
+    const addToOrder = (menuItem) => {
+        setOrder([...order, {...menuItem, quantity: 1}]);
+    }
+
+
     useEffect(() => {
         fetchMenuItems();
     }, []);
+
+
     return (
-        <>
+        <div className='menu-page'>
             <h1>Menu</h1>
             <div className='menu-container'>
-                {menuItems.map((menuItem) => (
-                    <div key={menuItem.id} className='menu-card'>
-                        <p>{menuItem.name}</p>
-                        <p>{menuItem.description}</p>
-                        <p>{menuItem.price}</p>
-                    </div>
+                {menuItems.map((item) => (
+                    <MenuItem key={item.id} item={item} addToOrderCallback={() => addToOrder(item)} />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 

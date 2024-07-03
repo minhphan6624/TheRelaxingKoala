@@ -20,7 +20,7 @@ const ViewOrders = () => {
     }, []);
 
     return (
-        <>
+        <div className='view-order-page'>
             <h1>Orders</h1>
             <div className='orders-container'>
                 {orders.map((order) => (
@@ -36,7 +36,7 @@ const ViewOrders = () => {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
