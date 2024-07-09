@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import './styles/ViewReservations.css';
+import '../styles/ViewReservations.css';
 
 const CreateReservation = () => {
     // Initialize state to hold fetched reservations

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import './styles/CreateReservation.css';
+import '../styles/CreateReservation.css';
 
 const CreateReservation = () => {
     const [reservation, setReservation] = useState({

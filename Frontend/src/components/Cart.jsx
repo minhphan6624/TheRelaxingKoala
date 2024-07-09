@@ -1,20 +1,30 @@
 import React from 'react'; 
 
-import {Link} from 'react-router-dom';
-
 const Cart = ( {order}) => {
     return (
         <div className='cart'>
             <h2> Cart </h2>
-            {
-                order.map((item, index) => (
-                    <div key={index} className='order-item'>
-                        <h3>{item.name}</h3>
-                        <p>Quantity: {item.quantity}</p>
-                        <p>Price: {item.price}</p>
-                    </div>
-                ))
-            }
+            <table>
+                <thead>
+                    <tr>
+                        <th> Item </th>
+                        <th> Quantity </th>
+                        <th> Price </th>
+                        <th> Total </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {order.map((item) => (
+                    <tr>
+                        <td> {item.name} </td>
+                        <td> {item.quantity} </td>
+                        <td> {item.price} </td>
+                        <td> {item.price * item.quantity} </td>
+                    </tr>
+                ))}
+                </tbody>
+
+            </table>
         </div>
     );
 }

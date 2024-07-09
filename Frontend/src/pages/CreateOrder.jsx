@@ -2,7 +2,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import './styles/CreateOrder.css';
+import '../styles/CreateOrder.css';
 
 const CreateOrder = () => {
 

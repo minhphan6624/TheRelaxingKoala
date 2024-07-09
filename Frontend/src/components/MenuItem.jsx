@@ -1,6 +1,6 @@
 import React from "react";
 
-import './styles/MenuItem.css';
+import '../styles/MenuItem.css';
 
 function MenuItem({item, addToOrderCallback}) {
     return (
@@ -8,7 +8,7 @@ function MenuItem({item, addToOrderCallback}) {
             <h2>{item.name}</h2>
             <p>{item.description}</p>
             <p>{item.price}</p>
-            <button onClick={addToOrderCallback}> Add to Order </button>
+            <button onClick={() => addToOrderCallback(item)}> Add to Order </button>
         </div>
     );
 }
