@@ -1,112 +1,131 @@
 
 import {useState, useEffect} from 'react';
-import axios from 'axios';
+import {useLocation} from 'react-router-dom'
 
 import '../styles/CreateOrder.css';
 
 const CreateOrder = () => {
-
-    const [menuItems, setMenuItems] = useState([]);
+    
+    const location = useLocation();
+    const orderDetails = location.state.order;
 
     const [customerDetails, setCustomerDetails] = useState({
-        customerName: '',
-        customerContact: '',
-        status: ''
-    });    
-
-    const [selectedItems, setSelectedItems] = useState({ id: '', quantity: 1 });
-
-    //Fetch all menu items from the server
-    useEffect(() => {
-        const fetchMenuItems = async () => {
-            try 
-            {
-                const response = await axios.get('http://localhost:3000/api/menuItems');
-                setMenuItems(response.data);
-            }
-            catch (error)
-            {
-                console.error('Error fetching menu items:', error);
-            }
-        }
-
-        fetchMenuItems();
+        customerName: "",
+        customerContact: ""
     });
+    const [paymentDetails, setPaymentDetails] = useState([]);
 
-    //Handle form input changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCustomerDetails({ ...customerDetails, [name]: value });
+    const handleCustomerDetailsChange = (e) => {
+        const {name, value} = e.target;
+        setCustomerDetails({...customerDetails, [name]: value});
     }
 
-    const handleMenuItemChange = (e) => {
-        const { name, value } = e.target;
-        
-        setSelectedItems({...selectedItems, [name]: value});
-    };
+    const handlePaymentDetailsChange = (e) => {
+        const {name, value } = e.target;
+        setPaymentDetails({...paymentDetails, [name]: value});
+    }
 
     const handleSubmit = async (e) => {
-        e.prevenDefault();
-        //Create a new order object
-        const menuItem = menuItems.find((item) => item.id === selectedItems.id);
+        e.preventDefault();
 
-        const order = {
-            customerName: customerDetails.customerName,
-            customerContact: customerDetails.customerContact,
-            status: customerDetails.status,
-            menuItems: [menuItem]
-        };
+        //Test with an alert message
+        alert('Order created successfully!');
 
-        try {
-            const response = await axios.post('http://localhost:3000/api/orders', order);
-            alert('Order created successfully!');
-            setCustomerDetails({ customerName: '', customerContact: '', status: 'pending' });
-            setSelectedItems({ id: '', quantity: 1 });
-        } catch (error) {
-            console.error('Error creating order:', error);
-        }
+        //Actual code to create an order
     }
 
     return (
-        <div className='order-form-container'>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Customer Name:</label>
-                    <input type="text" name="customerName" value={customerDetails.customerName} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label>Contact:</label>
-                    <input type="text" name="customerContact" value={customerDetails.customerContact} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label>Status:</label>
-                    <input type="text" name="status" value={customerDetails.status} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label>Menu Items:</label>
-                    <select name="menuItems" value={selectedItems} onChange={handleMenuItemChange}>
-                        {menuItems.map((item) => (
-                            <option key={item.id} value={item.id}>{item.name}</option>
-                        ))}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <label>Quantity:</label>
-                    <input
-                        type="number"
-                        name="quantity"
-                        value={selectedItems.quantity}
-                        onChange={handleMenuItemChange}
-                        min="1"
-                        required
-                    />
-                </div>
+        <div>
+            <h2> Order Details </h2>
+            {/* Display order details */}
+
+            <div className='order-details-table'>
+            <table>
+                <thead>
+                    <tr>
+                        <th> Item </th>
+                        <th> Quantity </th>
+                        <th> Price </th>
+                        <th> Total </th>
+                    </tr>
+                </thead>
+                <tbody>
+                {orderDetails.map((item) => (
+                    <tr key={item.id}>
+                        <td> {item.name} </td>
+                        <td> {item.quantity} </td>
+                        <td> {item.price} </td>
+                        <td> {item.price * item.quantity} </td>
+                    </tr>
+                ))}
+                </tbody>
+
+            </table>
+
+            <div className='customer-form-container'>
+                <form onSubmit={handleSubmit}>
+                    <fieldset>
+                        <legend> Customer details </legend>
+                        <div className="form-group">
+                            <label>Customer Name:</label>
+                            <input type="text" name="customerName" value={customerDetails.customerName} onChange={handleCustomerDetailsChange} />
+                        </div>
+                        <div className="form-group">
+                            <label>Contact:</label>
+                            <input type="text" name="customerContact" value={customerDetails.customerContact} onChange={handleCustomerDetailsChange} />
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Payment Details</legend>
+
+                        <div className="form-group">
+                            <label>Name on card
+                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            </label>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Card Type:
+                            <select name="cardType" id="cardType">
+                                <option value="visa">Visa</option>			
+                                <option value="master">MasterCard</option>
+                                <option value="amex">American Express</option>
+                            </select>
+                            </label>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Card Number:
+                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            </label>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Expiry date:
+                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            </label>
+                        </div>
+
+                        <div className="form-group">
+                            <label>CVC
+                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            </label>
+                        </div>
+
+                        <input type="submit" value="Check Out"/>
+                    </fieldset>
+                </form>
                 
-                <button type="submit">Create Order</button>
-            </form>
+            </div>
+
+            
+
+        </div>
+
 
         </div>
     );
 }
+
 
 export default CreateOrder;

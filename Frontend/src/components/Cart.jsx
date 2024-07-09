@@ -1,7 +1,14 @@
 import React from 'react'; 
+import {useNavigate} from 'react-router-dom';
+
+import '../styles/Cart.css';
 
 const Cart = ( {order}) => {
+
+    const navigate = useNavigate();
+
     return (
+        order.length === 0 ? <h2> Cart is empty </h2> :
         <div className='cart'>
             <h2> Cart </h2>
             <table>
@@ -15,7 +22,7 @@ const Cart = ( {order}) => {
                 </thead>
                 <tbody>
                 {order.map((item) => (
-                    <tr>
+                    <tr key={item.id}>
                         <td> {item.name} </td>
                         <td> {item.quantity} </td>
                         <td> {item.price} </td>
@@ -25,6 +32,10 @@ const Cart = ( {order}) => {
                 </tbody>
 
             </table>
+
+            <button onClick={() => {
+                navigate('/create-order', { state: {order} }); // Navigate with order details
+            }}> Make an order </button>
         </div>
     );
 }
