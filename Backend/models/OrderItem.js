@@ -1,8 +1,8 @@
-const {Sequelize, DataTypes} = require('sequelize');   
+const {DataTypes} = require('sequelize');   
 
 const {sequelize} = require('../db');
 
-const Order = require("./order");
+const Order = require("./Order");
 const MenuItem = require('./MenuItem');
 
 const OrderItem = sequelize.define('OrderItem', {

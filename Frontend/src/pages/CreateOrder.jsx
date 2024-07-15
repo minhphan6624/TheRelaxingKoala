@@ -1,6 +1,7 @@
 
 import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom'
+import axios from 'axios';
 
 import '../styles/CreateOrder.css';
 
@@ -29,9 +30,32 @@ const CreateOrder = () => {
         e.preventDefault();
 
         //Test with an alert message
-        alert('Order created successfully!');
+        // alert('Order created successfully!');
+        // console.log(customerDetails, paymentDetails, orderDetails)
 
         //Actual code to create an order
+        const orderData = {
+            ...customerDetails,
+            items : orderDetails.map((item) => (
+                {
+                    id: item.id,
+                    quantity: item.quantity,
+                    price: item.price
+                }
+            )),
+        }
+
+        try 
+        {
+            //Make a post request to create an order
+            await axios.post('http://localhost:3000/api/orders', orderData);
+            alert('Order created successfully!');
+        }
+        catch (error)
+        {
+            console.error('Error creating order:', error);
+            alert('Failed to create order');
+        }
     }
 
     return (
@@ -102,23 +126,21 @@ const CreateOrder = () => {
 
                         <div className="form-group">
                             <label>Expiry date:
-                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            <input type="text" name="exprDate" value={paymentDetails.exprDate} onChange={handlePaymentDetailsChange} />
                             </label>
                         </div>
 
                         <div className="form-group">
                             <label>CVC
-                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            <input type="text" name="cvc" value={paymentDetails.cvc} onChange={handlePaymentDetailsChange} />
                             </label>
                         </div>
 
-                        <input type="submit" value="Check Out"/>
                     </fieldset>
+                        <input type="submit" value="Check Out"/>
                 </form>
                 
             </div>
-
-            
 
         </div>
 

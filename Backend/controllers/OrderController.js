@@ -1,4 +1,4 @@
-const Order = require('../models/order');
+const Order = require('../models/Order');
 const OrderItem = require('../models/OrderItem');
 const MenuItem = require('../models/MenuItem');
 
@@ -50,6 +50,8 @@ exports.createOrder = async (req, res) => {
             
             // Fetch the menu item by ID
             const menuItem = await MenuItem.findByPk(item.id);
+
+            // If the menu item is not found, throw an error
             if (!menuItem) {
                 throw new Error(`Menu item with ID ${item.id} not found`);
             }

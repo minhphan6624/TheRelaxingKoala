@@ -28,6 +28,10 @@ const Menu = () => {
         fetchMenuItems();
     }, []);
 
+    useEffect(() => {
+        console.log(order);
+    }, [order]);
+
     //Add a menu item to the order
     const addToOrder = (menuItem) => {
         
@@ -45,7 +49,6 @@ const Menu = () => {
             console.log(order);
         } else {
             setOrder([...order, { ...menuItem, quantity: 1 }]);
-            console.log(order);
         }
     }
 
