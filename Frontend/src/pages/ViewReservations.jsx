@@ -23,9 +23,9 @@ const CreateReservation = () => {
     }, []);
 
     return (
-        <>
+        <div className='view-reservation-page'>
             <h1>Reservations</h1>
-            <div className='reservation-container'>
+            <div className='reservations-container'>
                 {reservations.map((reservation) => (
                     <div key={reservation.id} className="reservation-card">
                         <p>Customer Name: {reservation.name}</p>
@@ -35,7 +35,7 @@ const CreateReservation = () => {
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 

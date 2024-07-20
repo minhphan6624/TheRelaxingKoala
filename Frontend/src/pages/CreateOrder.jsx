@@ -104,7 +104,7 @@ const CreateOrder = () => {
 
                         <div className="form-group">
                             <label>Name on card
-                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            <input type="text" name="cardName" value={paymentDetails.cardName} onChange={handlePaymentDetailsChange} />
                             </label>
                         </div>
 
@@ -120,7 +120,7 @@ const CreateOrder = () => {
 
                         <div className="form-group">
                             <label>Card Number:
-                            <input type="text" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
+                            <input type="number" name="cardNumber" value={paymentDetails.cardNumber} onChange={handlePaymentDetailsChange} />
                             </label>
                         </div>
 
@@ -132,7 +132,7 @@ const CreateOrder = () => {
 
                         <div className="form-group">
                             <label>CVC
-                            <input type="text" name="cvc" value={paymentDetails.cvc} onChange={handlePaymentDetailsChange} />
+                            <input type="number" name="cvc" value={paymentDetails.cvc} onChange={handlePaymentDetailsChange} />
                             </label>
                         </div>
 

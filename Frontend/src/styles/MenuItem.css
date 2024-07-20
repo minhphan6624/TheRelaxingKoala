@@ -5,7 +5,13 @@
     width: 200px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
 }
+
+.menu-item-card:hover {
+    transform: scale(1.05);
+  }
 
 .menu-item-card h2 {
     margin: 0 0 0.5rem;
@@ -16,12 +22,23 @@
 }
 
 .menu-item-card button {
-    background-color: #4CAF50;
+    /* background-color: #4CAF50;
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 4px; */
+    cursor: pointer; 
+    display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background-color 0.2s;
 }
 
 .menu-item-card button:hover {
