@@ -33,6 +33,7 @@ const ViewOrders = () => {
                                 <li key={item.id}> {item.MenuItem.name} - {item.quantity}</li>
                             ))}
                         </ul>
+                        <p>Created at: {order.createdAt}</p>
                     </div>
                 ))}
             </div>

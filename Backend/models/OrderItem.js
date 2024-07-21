@@ -9,7 +9,7 @@ const OrderItem = sequelize.define('OrderItem', {
     quantity: { type: DataTypes.INTEGER, allowNull: false },
     price: { type: DataTypes.FLOAT, allowNull: false } // Store the price at the time of order    
 }, {
-    timestamps: true
+    timestamps: false
 });
 
 //Define the relationship with conrete models
