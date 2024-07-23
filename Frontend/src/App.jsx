@@ -10,6 +10,8 @@ import ViewReservations from './pages/ViewReservations';
 import CreateReservation from './pages/CreateReservation'
 import Menu from './pages/Menu';
 import HomePage from './pages/HomePage';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 import './App.css';
 
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/view-reservations" element={<ViewReservations />} />
                 <Route path="/create-reservation" element={<CreateReservation />} />
                 <Route path="/menu" element={<Menu />} />
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
             </Routes>
             <Footer />
         </>
