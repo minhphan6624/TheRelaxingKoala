@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const ReservationController = require('../controllers/reservationController.js');
-const reservationValidator = require('../middlewares/reservationValidator.js');
+const ReservationController = require('../controllers/ReservationController.js');
+const reservationValidator = require('../middlewares/ReservationValidator.js');
+const authenticateJWT = require('../middlewares/authMiddleware.js');
 
 // Define routes for reservations
-router.get('/', ReservationController.getAllReservations);
+router.get('/', authenticateJWT, ReservationController.getAllReservations);
 router.get('/:id', ReservationController.getReservationById);
 router.post('/', reservationValidator, ReservationController.createReservation);
 router.put('/:id', reservationValidator, ReservationController.updateReservation);

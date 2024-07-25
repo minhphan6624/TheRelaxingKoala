@@ -41,20 +41,24 @@ router.post('/login', async (req, res) => {
 
         // const user = result[0]; //Get the first from the result
 
-        const user = await User.findOne({ where: { username } });
+        const user = await User.findOne({ where: { username } }); //Find the user with the given username
 
+        //If the user does not exist, send an error message
         if (!user)
         {
             return res.status(400).send({error : 'Invalid username or password'});
         }
 
-        const isValid = await bcrypt.compare(password, user.password); //Compare the password with the hashed password
+        //Compare the password with the hashed password
+        const isValid = await bcrypt.compare(password, user.password); 
         if (!isValid)
         {
             return res.status(400).send({error : 'Invalid username or password'});
         }
 
+        //Create a JWT token
         const token = jwt.sign({id: user.id, username : user.username}, jwtSecret); //Create a JWT token
+        
         res.json({token}); //Send the token as a response
     }
     catch (err)

@@ -1,0 +1,36 @@
+.login-page {
+  padding: auto;
+  margin: auto;
+}
+
+.login-page .login-form {
+  width: 340px;
+  margin: 5px auto;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #858181;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 #858181;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #858181;
+    border-radius: 10px;
+}
+
+.login-btn{
+    /* display: block;
+    width: auto; */
+    /* padding: auto;
+    margin: 10px; */
+    border: 1px solid #000;
+    border-radius: 10px;
+}

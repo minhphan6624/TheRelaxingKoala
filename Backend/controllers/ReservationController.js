@@ -8,6 +8,7 @@ exports.getAllReservations = async (req, res) => {
     const reservations = await Reservation.findAll();
     res.json(reservations);
   } catch (error) {
+    console.error('Failed to fetch reservations', error);
     res.status(500).json({ message: error.message });
   }
 };

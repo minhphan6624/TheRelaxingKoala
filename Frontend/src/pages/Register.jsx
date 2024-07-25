@@ -1,10 +1,12 @@
 import {Link} from 'react-router-dom';
 
+import '../styles/Register.css';
+
 const Register = () => 
 {
     return (
         <div className="register-page">
-            <form action="">
+            <form action="" className='register-form'>
             <h1>Register</h1>
             <p> Please fill in this form to create an account</p>
 
