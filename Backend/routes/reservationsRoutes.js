@@ -6,7 +6,7 @@ const reservationValidator = require('../middlewares/ReservationValidator.js');
 const authenticateJWT = require('../middlewares/authMiddleware.js');
 
 // Define routes for reservations
-router.get('/', authenticateJWT, ReservationController.getAllReservations);
+router.get('/', ReservationController.getAllReservations);
 router.get('/:id', ReservationController.getReservationById);
 router.post('/', reservationValidator, ReservationController.createReservation);
 router.put('/:id', reservationValidator, ReservationController.updateReservation);

@@ -4,11 +4,13 @@ import '../styles/MenuItem.css';
 
 function MenuItem({item, addToOrderCallback}) {
     return (
-        <div className="menu-item-card">
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-            <button onClick={() => addToOrderCallback(item)}> Add to Order </button>
+        <div className="card">
+            <div className="card-body">
+                <h2 className="card-title">{item.name}</h2>
+                <p className="card-text">{item.description}</p>
+                <p className="card-text">{item.price}</p>
+                <button className="btn btn-primary" onClick={() => addToOrderCallback(item)}> Add to Order </button>
+            </div>
         </div>
     );
 }

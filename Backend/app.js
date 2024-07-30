@@ -6,7 +6,8 @@ const seedMenuItems = require('./seedData');
 
 // Middlewares
 app.use(express.json()); //Parse JSON bodies
-app.use(cors());
+app.use(cors({origin: allowedOrigin,
+  credentials: true}));
 
 //DB connection
 const { connectDB } = require('./db');
