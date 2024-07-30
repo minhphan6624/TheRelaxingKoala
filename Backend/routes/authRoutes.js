@@ -12,6 +12,7 @@ const jwtSecret = process.env.JWT_SECRET;
 router.post('/register', async (req, res) => {
     
     const {username, password} = req.body; //Get the username and password from the request body
+
     try 
     {
         const hasedPassword = await bcrypt.hash(password, 10); //Hash the password 
@@ -19,8 +20,9 @@ router.post('/register', async (req, res) => {
             'INSERT INTO users (username, password) VALUES (?, ?)', 
             {replacements: [username, hasedPassword]}
         );
+    
         console.log(results);
-        res.status(201).json({message : 'User created successfully'});
+        return res.status(201).json({message : 'User created successfully'});
     }
     catch (error)
     {
@@ -57,9 +59,11 @@ router.post('/login', async (req, res) => {
         }
 
         //Create a JWT token
-        const token = jwt.sign({id: user.id, username : user.username}, jwtSecret); //Create a JWT token
+        const token = jwt.sign({id: user.id, username : user.username}, jwtSecret); 
+
+        res.cookie('token', token, {httpOnly: true, secure: true, sameSite: 'strict'}); //set the token in a http -only cookie
         
-        res.json({token}); //Send the token as a response
+        return res.status(200).send({message: "login successful!"}); //Send the token as a response
     }
     catch (err)
     {

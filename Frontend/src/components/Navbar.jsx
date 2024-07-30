@@ -11,8 +11,8 @@ function Navbar() {
             <ul>
                 <li><Link to="/menu"> Menu </Link></li>
                 <li><Link to="/create-reservation">Create Reservation</Link></li>
-                <li><Link to="/view-reservations">View Reservations</Link></li>
-                <li><Link to="/view-orders">View Orders</Link></li>
+                {/* <li><Link to="/view-reservations">View Reservations</Link></li> */}
+                {/* <li><Link to="/view-orders">View Orders</Link></li> */}
                 <li><Link to="/login"> Login</Link> </li>
                 <li><Link to="/register"> Register</Link> </li>
             </ul>

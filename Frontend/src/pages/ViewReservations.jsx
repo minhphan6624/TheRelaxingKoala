@@ -3,39 +3,8 @@ import axios from 'axios';
 
 import '../styles/ViewReservations.css';
 
-// //Set up request interceptor to add token to requests
-// axios.interceptors.request.use(
-//     (config) => {
-//         const token = localStorage.getItem('token');// Retrieve the token from local storage
-//         if (token) 
-//         {
-//             config.headers.Authorization = `Bearer ${token}`; //Add token to the headers
-//         }
-
-//         return config
-//     },
-//     (error) => 
-//     {
-//         return Promise.reject(error);
-//     }
-// );
-
-// //Set up response interceptor to handle errors
-// axios.interceptors.response.use(
-//     (response) => {
-//         return response;  // Any status code within the range of 2xx causes this function to trigger
-//     },
-//     (error) =>
-//     {
-//         if (error.response.status === 401 )
-//         {
-//             console.error('Unauthorized, redirecting to login');
-//             window.location.href = '/login'; // Redirect to login page if token is invalid
-//         }
-
-//         return Promise.reject(error)
-//     }
-// );
+//Set up axios to send cookies with every request
+axios.defaults.withCredentials = true; 
 
 const CreateReservation = () => {
     // Initialize state to hold fetched reservations
