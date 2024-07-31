@@ -1,0 +1,15 @@
+{
+  "name": "therelaxingkoala",
+  "version": "1.0.0",
+  "description": "Github repo for the implementation of Restaurant Information System for The Relaxing Koala restaurant",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
