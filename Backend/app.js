@@ -6,10 +6,8 @@ const seedMenuItems = require('./seedData');
 
 // Middlewares
 app.use(express.json()); //Parse JSON bodies
-app.use(cors());
-
-//DB connection
-const { connectDB } = require('./db');
+app.use(cors({ origin: 'http://localhost:5173', // specify the allowed origin
+  credentials: true, }));
 
 //Import routes
 const reservationRoutes = require('./routes/reservationsRoutes');
@@ -21,6 +19,9 @@ app.use('/api/reservations', reservationRoutes) // Reservation routes
 app.use('/api/orders', orderRoutes) // Order routes
 app.use('/api/menuItems', menuItemRoutes) // Menu item routes
 app.use('/api/auth', authRoutes) // Auth routes
+
+//DB connection
+const { connectDB } = require('./db');
 
 // Connect to the database and sync models
 connectDB().then(async () => {

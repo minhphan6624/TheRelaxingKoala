@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Cart from '../components/Cart';
-import MenuItem from '../components/MenuItem';
 import MenuItemContainer from '../components/MenuItemContainer';
 
 import '../styles/Menu.css';
@@ -71,9 +70,15 @@ const Menu = () => {
 
     return (
         <div className='menu-page'>
-            <h1>Menu</h1>
-            <MenuItemContainer menuItems={menuItems} addToOrder={addToOrder}/>
-            <Cart order={order} removeFromOrder={removeFromOrder}/>
+            <h1 className='text-center'>Menu</h1>
+            <div className="container">
+                <div className="row">
+                        <MenuItemContainer menuItems={menuItems} addToOrder={addToOrder}/>
+                </div>
+                <div className="row">
+                    <Cart order={order} removeFromOrder={removeFromOrder}/>
+                </div>
+            </div>
         </div>
     );
 };

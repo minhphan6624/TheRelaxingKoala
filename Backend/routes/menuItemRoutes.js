@@ -7,8 +7,8 @@ const menuItemValidator = require('../middlewares/menuItemValidator');
 //Define routes for menuitems
 router.get('/', menuItemController.getAllMenuItems);
 router.get('/:id', menuItemController.getMenuItemById);
-router.post('/', menuItemValidator, menuItemController.createMenuItem);
-router.put('/:id',menuItemValidator, menuItemController.updateMenuItem);
+router.post('/', menuItemController.createMenuItem);
+router.put('/:id', menuItemController.updateMenuItem);
 router.delete('/:id', menuItemController.deleteMenuItem);
 
 module.exports = router;
