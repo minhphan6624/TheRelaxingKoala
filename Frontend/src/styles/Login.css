@@ -1,6 +1,7 @@
 .login-page {
   padding: auto;
   margin: auto;
+  height: 90vh;
 }
 
 .login-page .login-form {
@@ -15,22 +16,22 @@
 }
 
 .login-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-form input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #858181;
-    border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #858181;
+  border-radius: 10px;
 }
 
-.login-btn{
-    /* display: block;
+.login-btn {
+  /* display: block;
     width: auto; */
-    /* padding: auto;
+  /* padding: auto;
     margin: 10px; */
-    border: 1px solid #000;
-    border-radius: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
 }
